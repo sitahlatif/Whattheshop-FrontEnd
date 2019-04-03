@@ -8,10 +8,10 @@ class Login extends Component {
     password: ""
   };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     this.props.login(this.state);
-  }
+  };
 
   handleChange = event =>
     this.setState({ [event.target.name]: event.target.value });
