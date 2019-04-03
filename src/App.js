@@ -7,22 +7,12 @@ import * as actionCreators from "./store/actions";
 import ProductsList from "./components/ProductsList";
 import ProductDetail from "./components/ProductDetail";
 import Login from "./components/Login";
-
-function mapStateToProps(state) {
-  return {
-    products: state.productsRoot.products
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts())
-  };
-}
+import Profile from "./components/Profile";
 
 class App extends Component {
   componentDidMount = () => {
     this.props.onFetchAllProducts();
+    this.props.onProfileDetail(this.props.user.id);
   };
   render() {
     let products = [];
@@ -33,6 +23,9 @@ class App extends Component {
           <ProductsList products={products} />
           <ProductDetail products={products} />
           <Login />
+          {this.props.profile.user && (
+            <Profile profile={this.props.profile.user} />
+          )}
         </div>
       );
     }
@@ -40,6 +33,20 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.authRoot.user,
+    products: state.productsRoot.products,
+    profile: state.profileRoot.profile
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts()),
+    onProfileDetail: userID => dispatch(actionCreators.profileDetail(userID))
+  };
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
