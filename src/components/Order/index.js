@@ -1,16 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/ordersAction";
 
 class Order extends Component {
   render() {
-    return <div />;
+    return <button onClick={this.props.onCheckout(this.props.order.id)} />;
   }
 }
-function mapStateToProps(state) {
-  return {};
-}
+const mapStateToProps = state => {
+  return {
+    order: this.state.ordersRoot.orders
+  };
+};
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-export default connect(mapStateToProps)(Order);
+const mapDispatchToProps = dispatch => {
+  return {
+    onCheckout: orderID => dispatch(actionCreators.checkout(orderID))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Order);
