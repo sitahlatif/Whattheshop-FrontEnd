@@ -1,28 +1,44 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { connect } from "react-redux";
+import * as actionCreators from "./store/actions";
+
+// Components
+import ProductsList from "./components/ProductsList";
+import ProductDetail from "./components/ProductDetail";
+
+function mapStateToProps(state) {
+  return {
+    products: state.productsRoot.products
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts())
+  };
+}
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.onFetchAllProducts();
+  };
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    let products = [];
+    if (this.props.products) {
+      products = this.props.products;
+      return (
+        <div>
+          <ProductsList products={products} />
+          <ProductDetail products={products} />
+        </div>
+      );
+    }
+    return <div />;
   }
 }
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
