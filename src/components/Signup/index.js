@@ -1,22 +1,26 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import * as actionCreators from "./store/actions/index";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions";
+import { dispatch } from "rxjs/internal/observable/range";
 
-class Login extends Component {
+class Signup extends Component {
   state = {
     username: "",
+    email: "",
     password: ""
   };
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.login(this.state);
-  }
-
   handleChange = event =>
     this.setState({ [event.target.name]: event.target.value });
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.signup(this.state);
+  };
+
   render() {
-    const { username, password } = this.state;
+    const { username, email, password } = this.state;
 
     return (
       <div className="col-6 mx-auto">
@@ -29,9 +33,21 @@ class Login extends Component {
                   type="text"
                   className="form-control"
                   id="username"
-                  value={username}
+                  value={this.state.username}
                   name="username"
                   placeholder="Username"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  value={this.state.emailemail}
+                  name="email"
+                  placeholder="Email"
                   onChange={this.handleChange}
                 />
               </div>
@@ -41,7 +57,7 @@ class Login extends Component {
                   type="password"
                   className="form-control"
                   id="password"
-                  value={password}
+                  value={this.state.password}
                   name="password"
                   placeholder="Password"
                   onChange={this.handleChange}
@@ -49,10 +65,10 @@ class Login extends Component {
               </div>
 
               <button type="submit" className="btn btn-primary">
-                Login
+                Signup
               </button>
-              {/* <Link to="Signup" className="btn btn-link my-2 my-sm-0">
-                Signup for an account
+              {/* <Link to="/login" className="btn btn-link my-2 my-sm-0">
+                I already have an account
               </Link> */}
             </form>
           </div>
@@ -62,11 +78,12 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  login: userData => dispatch(actionCreators.login(userData))
-});
-
+const mapDispatchToProps = dispatch => {
+  return {
+    signup: userData => dispatch(actionCreators.signup(userData))
+  };
+};
 export default connect(
   null,
   mapDispatchToProps
-)(Login);
+)(Signup);
