@@ -10,11 +10,14 @@ import Login from "./components/Authentication/Login";
 import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
+import ProfileUpdate from "./components/ProfileUpdate";
 
 class App extends Component {
   componentDidMount = () => {
     this.props.onFetchAllProducts();
-    this.props.onProfileDetail(this.props.user.id);
+    if (this.props.user) {
+      this.props.onProfileDetail(this.props.user.user_id);
+    }
   };
   render() {
     let products = [];
@@ -24,11 +27,12 @@ class App extends Component {
         <div>
           {/* <ProductsList products={products} />
           <ProductDetail products={products} /> */}
-          <Login />
+          {/* <Login />
           <Logout />
-          <Singup />
+          <Singup /> */}
+          {this.props.profile.user && <Profile profile={this.props.profile} />}
           {this.props.profile.user && (
-            <Profile profile={this.props.profile.user} />
+            <ProfileUpdate profile={this.props.profile} />
           )}
         </div>
       );

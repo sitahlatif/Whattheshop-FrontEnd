@@ -39,6 +39,8 @@ const setCurrentUser = user => ({
 });
 
 export const login = userData => {
+  console.log(userData);
+
   return async dispatch => {
     try {
       let response = await instance.post("login/", userData);
