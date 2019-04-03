@@ -7,7 +7,7 @@ const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
 });
 
-export const checkout = (orderID, history) => {
+export const checkout = orderID => {
   return async dispatch => {
     try {
       const res = await instance.post(`order/${orderID}/checkout/`);
@@ -17,7 +17,7 @@ export const checkout = (orderID, history) => {
         type: actionTypes.CHECKOUT,
         payload: checkout
       });
-      history.push("/HomePage");
+      // history.push("/HomePage");
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
