@@ -7,7 +7,7 @@ import profileReducer from "./profileReducer";
 
 export default combineReducers({
   productsRoot: productsReducer,
-  authenticationsRoot: authenticationsReducer,
+  authRoot: authenticationsReducer,
   ordersRoot: ordersReducer,
   profileRoot: profileReducer
 });
