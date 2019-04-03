@@ -1,16 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class ProductList extends Component {
+// Components
+import ProductListItem from "./ProductListItem";
+
+class ProductsList extends Component {
   render() {
-    return <div />;
+    const productsList = this.props.products.map(product => (
+      <ProductListItem key={product.id} product={product} />
+    ));
+    return <ul>{productsList}</ul>;
   }
 }
 function mapStateToProps(state) {
-  return {};
+  return {
+    // products: state.productsRoot.products
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {};
 }
-export default connect(mapStateToProps)(ProductsList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductsList);
