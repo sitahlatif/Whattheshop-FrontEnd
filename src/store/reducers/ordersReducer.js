@@ -1,7 +1,21 @@
 import React from "react";
+import * as actionTypes from "../actions/actionTypes";
 
-const ordersReducer = () => {
-  return <div />;
+const initialState = {
+  orders: []
+};
+
+const ordersReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.CHECKOUT:
+      return {
+        ...state,
+        orders: action.payload
+      };
+
+    default:
+      return state;
+  }
 };
 
 export default ordersReducer;
