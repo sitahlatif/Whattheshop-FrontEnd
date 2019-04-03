@@ -6,7 +6,9 @@ import * as actionCreators from "./store/actions";
 // Components
 import ProductsList from "./components/ProductsList";
 import ProductDetail from "./components/ProductDetail";
-import Login from "./components/Login";
+import Login from "./components/Authentication/Login";
+import Singup from "./components/Authentication/Signup";
+import Logout from "./components/Authentication/Logout";
 
 function mapStateToProps(state) {
   return {
@@ -30,9 +32,11 @@ class App extends Component {
       products = this.props.products;
       return (
         <div>
-          <ProductsList products={products} />
-          <ProductDetail products={products} />
+          {/* <ProductsList products={products} />
+          <ProductDetail products={products} /> */}
           <Login />
+          <Logout />
+          <Singup />
         </div>
       );
     }
