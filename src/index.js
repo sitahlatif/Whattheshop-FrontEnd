@@ -5,6 +5,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./store";
 import { Provider } from "react-redux";
+import * as actionCreators from "./store/actions/index";
+
+store.dispatch(actionCreators.checkForExpiredToken());
 
 ReactDOM.render(
   <Provider store={store}>

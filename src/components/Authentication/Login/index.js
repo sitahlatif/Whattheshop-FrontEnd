@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions";
+import * as actionCreators from "../../../store/actions";
 
 class Login extends Component {
   state = {
@@ -47,7 +47,6 @@ class Login extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <button type="submit" className="btn btn-primary">
                 Login
               </button>

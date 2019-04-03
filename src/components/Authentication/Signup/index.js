@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import * as actionCreators from "./store/actions/index";
+// import { Link } from "react-router-dom";
+import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
-import { dispatch } from "rxjs/internal/observable/range";
 
 class Signup extends Component {
   state = {
@@ -20,8 +19,6 @@ class Signup extends Component {
   };
 
   render() {
-    const { username, email, password } = this.state;
-
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">
@@ -45,7 +42,7 @@ class Signup extends Component {
                   type="email"
                   className="form-control"
                   id="email"
-                  value={this.state.emailemail}
+                  value={this.state.email}
                   name="email"
                   placeholder="Email"
                   onChange={this.handleChange}

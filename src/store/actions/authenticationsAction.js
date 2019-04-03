@@ -7,15 +7,28 @@ const instance = axios.create({
 });
 
 const setAuthToken = token => {
+  if (token) {
+    axios.defaults.headers.common.Authorization = `JWT ${token}`;
+    localStorage.setItem("myToken", token);
+  } else {
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
+
+export const checkForExpiredToken = () => {
   return dispatch => {
+    const token = localStorage.getItem("myToken");
+
     if (token) {
-      axios.defaults.headers.common.Authorization = `JWT ${token}`;
-      const decodedUser = jwt_decode(token);
-      dispatch(setCurrentUser(decodedUser));
-      localStorage.setItem("myToken", token);
-    } else {
-      delete axios.defaults.headers.common.Authorization;
-      dispatch(setCurrentUser());
+      const currentTime = Date.now() / 1000;
+      const user = jwt_decode(token);
+      console.log(user.exp >= currentTime);
+      if (user.exp >= currentTime) {
+        setAuthToken(token);
+        dispatch(setCurrentUser(user));
+      } else {
+        dispatch(logout());
+      }
     }
   };
 };
@@ -30,7 +43,8 @@ export const login = userData => {
     try {
       let response = await instance.post("login/", userData);
       let user = response.data;
-      dispatch(setAuthToken(user.token));
+      setAuthToken(user.token);
+      dispatch(setCurrentUser(jwt_decode(user.token)));
     } catch (err) {
       console.error("An error occurred", err);
     }
@@ -40,15 +54,17 @@ export const login = userData => {
 export const signup = userData => {
   return async dispatch => {
     try {
-      const res = await instance.post("register/", userData);
-      const user = res.data;
-      console.log(jwt_decode(user.token));
-      console.log(user);
+      const response = await instance.post("register/", userData);
+      let user = response.data;
+      setAuthToken(user.token);
+      dispatch(setCurrentUser(jwt_decode(user.token)));
     } catch (err) {
       console.error(err.response.data);
     }
-    dispatch(login(userData));
   };
 };
 
-export const logout = () => {};
+export const logout = () => {
+  setAuthToken();
+  return setCurrentUser();
+};
