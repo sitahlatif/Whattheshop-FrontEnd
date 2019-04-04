@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import * as actionCreators from "./store/actions";
@@ -25,15 +26,29 @@ class App extends Component {
       products = this.props.products;
       return (
         <div>
-          {/* <ProductsList products={products} />
-          <ProductDetail products={products} /> */}
-          {/* <Login />
-          <Logout />
-          <Singup /> */}
-          {this.props.profile.user && <Profile profile={this.props.profile} />}
-          {this.props.profile.user && (
-            <ProfileUpdate profile={this.props.profile} />
-          )}
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/singup" component={Singup} />
+            <Route path="/logout" component={Logout} />
+            {this.props.profile.user && (
+              <Route
+                path="/profile"
+                render={props => (
+                  <Profile {...props} profile={this.props.profile} />
+                )}
+              />
+            )}
+
+            <Route path="/products/:productID" component={ProductDetail} />
+            <Route
+              path="/products"
+              render={props => (
+                <ProductsList {...props} products={this.props.products} />
+              )}
+            />
+
+            {/* <Redirect to="/" /> */}
+          </Switch>
         </div>
       );
     }
@@ -55,7 +70,9 @@ const mapDispatchToProps = dispatch => {
     onProfileDetail: userID => dispatch(actionCreators.profileDetail(userID))
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

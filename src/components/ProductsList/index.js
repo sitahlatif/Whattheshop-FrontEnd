@@ -12,16 +12,11 @@ class ProductsList extends Component {
     return <ul>{productsList}</ul>;
   }
 }
-function mapStateToProps(state) {
-  return {
-    // products: state.productsRoot.products
-  };
-}
-
-function mapDispatchToProps(dispatch) {
+const mapStateToProps = state => {
   return {};
-}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductsList);
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+export default ProductsList;

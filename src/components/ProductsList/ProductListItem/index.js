@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {};
-}
+import { Link } from "react-router-dom";
 /* this is just temp im using li to just display it in a list.*/
 class index extends Component {
   render() {
     const { product } = this.props;
-    return <li>{product.name}</li>;
+    return (
+      <div>
+        <Link to={`/products/${product.id}`}>{product.name}</Link>
+      </div>
+    );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(index);
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+export default index;
