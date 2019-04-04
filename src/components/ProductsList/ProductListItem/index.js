@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import * as actionCreators from "../../../store/actions/cartAction";
+
+import { Link } from "react-router-dom";
+
 /* this is just temp im using li to just display it in a list.*/
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 class index extends Component {
@@ -14,6 +18,7 @@ class index extends Component {
   render() {
     const { product } = this.props;
     return (
+
       <div className="card col-4">
         <div className="card-body ">
           <img
@@ -52,6 +57,9 @@ class index extends Component {
             Add to cart
           </a>
         </div>
+      <div>
+        <Link to={`/products/${product.id}`}>{product.name}</Link>
+
       </div>
     );
   }
@@ -77,3 +85,4 @@ export default withRouter(
     mapDispatchToProps
   )(index)
 );
+

@@ -3,9 +3,17 @@ import { connect } from "react-redux";
 
 class ProductDetail extends Component {
   render() {
+    console.log(this.props.products);
     let product = {};
-    if (this.props.products.find(product => product.id === 1)) {
-      product = this.props.products.find(product => product.id === 1);
+    if (
+      this.props.products.find(
+        product => product.id == this.props.match.params.productID
+      )
+    ) {
+      product = this.props.products.find(
+        product => product.id == this.props.match.params.productID
+      );
+      console.log(product);
       return (
         <div>
           <p>Name: {product.name}</p>
@@ -27,17 +35,18 @@ class ProductDetail extends Component {
     return <div />;
   }
 }
-// function mapStateToProps(state) {
-//   return {
-//     // products: state.productsRoot.products
-//   };
-// }
+
+const mapStateToProps = state => {
+  return {
+    products: state.productsRoot.products
+  };
+};
 
 function mapDispatchToProps(dispatch) {
   return {};
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProductDetail);

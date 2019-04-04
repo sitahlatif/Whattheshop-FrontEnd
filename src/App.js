@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import * as actionCreators from "./store/actions";
@@ -11,7 +12,11 @@ import Login from "./components/Authentication/Login";
 import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
+
 import Order from "./components/Order";
+
+import ProfileUpdate from "./components/ProfileUpdate";
+
 class App extends Component {
   componentDidMount = () => {
     this.props.onFetchAllProducts();
@@ -46,18 +51,15 @@ class App extends Component {
                 <ProductsList {...props} products={this.props.products} />
               )}
             />
+
             {/* <Route
               path="/Order"
               render={props => <Order {...props} order={this.props.profile} />}
             /> */}
           </Switch>
-          {/* <ProductsList products={products} />
-          <ProductDetail products={products} />
-          <Login />
-          <Logout />
-          <Singup />
-
-          {this.props.profile.user && <Profile profile={this.props.user} />} */}
+          
+            {/* <Redirect to="/" /> */}
+          </Switch>
         </div>
       );
     }

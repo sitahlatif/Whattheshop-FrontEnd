@@ -8,7 +8,9 @@ class Profile extends Component {
       <div>
         <li>Username: {this.props.profile.user.username}</li>
         <li>First Name: {this.props.profile.user.first_name}</li>
+
         <li>Address: {this.props.profile.address}</li>
+
       </div>
     );
   }
@@ -24,7 +26,4 @@ const mapDispatchToProps = dispatch => {
     profileDetail: userID => dispatch(actionCreators.profileDetail(userID))
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default Profile;

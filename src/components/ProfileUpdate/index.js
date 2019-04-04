@@ -10,7 +10,11 @@ class ProfileUpdate extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.profileUpdate(this.props.user.id);
+    if (this.props.profile) {
+      console.log("this is the user");
+      console.log(this.props.profile);
+      this.props.profileUpdate(this.props.profile.id);
+    }
   };
   handleChange = event =>
     this.setState({ [event.target.name]: event.target.value });
@@ -25,7 +29,7 @@ class ProfileUpdate extends Component {
               type="text"
               className="form-control"
               id="address"
-              value={address}
+              value={this.state.address}
               name="address"
               placeholder="address"
               onChange={this.handleChange}
@@ -52,12 +56,12 @@ class ProfileUpdate extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    profile: state.profileRoot.profile,
-    user: state.authRoot.user
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     profile: state.profileRoot.profile,
+//     user: state.authRoot.user
+//   };
+// };
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -65,6 +69,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ProfileUpdate);
