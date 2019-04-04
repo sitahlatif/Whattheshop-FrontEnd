@@ -6,7 +6,7 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.PROFILE_DETAIL:
+    case actionTypes.PROFILE:
       return {
         ...state,
         profile: action.payload

@@ -3,7 +3,6 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import * as actionCreators from "./store/actions";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 // Components
 import ProductsList from "./components/ProductsList";
@@ -13,17 +12,16 @@ import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
 
-import Order from "./components/Order";
-
-import ProfileUpdate from "./components/ProfileUpdate";
+// import ProfileUpdate from "./components/ProfileUpdate";
+import Cart from "./components/Cart";
 
 class App extends Component {
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.onFetchAllProducts();
-    if (this.props.user) {
-      this.props.onProfileDetail(this.props.user.user_id);
-    }
+    await this.props.onProfileDetail();
+    this.props.onfetchCartList();
   };
+
   render() {
     let products = [];
     if (this.props.products) {
@@ -34,14 +32,12 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Singup} />
             <Route path="/logout" component={Logout} />
-            {this.props.profile.user && (
-              <Route
-                path="/profile"
-                render={props => (
-                  <Profile {...props} profile={this.props.profile} />
-                )}
-              />
-            )}
+            <Route
+              path="/profile"
+              render={props => (
+                <Profile {...props} profile={this.props.profile} />
+              )}
+            />
 
             <Route path="/products/:productID" component={ProductDetail} />
 
@@ -51,15 +47,15 @@ class App extends Component {
                 <ProductsList {...props} products={this.props.products} />
               )}
             />
+            <Route path="/cart" component={Cart} />
 
             {/* <Route
               path="/Order"
               render={props => <Order {...props} order={this.props.profile} />}
             /> */}
           </Switch>
-          
-            {/* <Redirect to="/" /> */}
-          </Switch>
+
+          {/* <Redirect to="/" /> */}
         </div>
       );
     }
@@ -78,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts()),
-    onProfileDetail: userID => dispatch(actionCreators.profileDetail(userID))
+    onProfileDetail: () => dispatch(actionCreators.profile()),
+    onfetchCartList: () => dispatch(actionCreators.fetchCartList())
   };
 };
 export default withRouter(

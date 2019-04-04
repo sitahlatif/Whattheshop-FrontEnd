@@ -3,8 +3,14 @@ import { connect } from "react-redux";
 
 // Components
 import ProductListItem from "./ProductListItem";
+import * as actionCreators from "../../store/actions";
 
 class ProductsList extends Component {
+  componentDidMount = async () => {
+    this.props.onFetchAllProducts();
+    await this.props.onProfileDetail();
+    // this.props.onfetchCartList();
+  };
   render() {
     const productsList = this.props.products.map(product => (
       <ProductListItem key={product.id} product={product} />
@@ -17,6 +23,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts()),
+    onProfileDetail: () => dispatch(actionCreators.profile())
+  };
 };
-export default ProductsList;
+export default connect(
+  null,
+  mapDispatchToProps
+)(ProductsList);

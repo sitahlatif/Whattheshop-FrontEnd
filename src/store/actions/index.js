@@ -7,7 +7,7 @@ export {
 
 export { fetchAllProducts, fetchCategories } from "./productsAction";
 
-export { profileDetail, profileUpdate } from "./profileAction";
+export { profile, profileUpdate } from "./profileAction";
 export { checkout } from "./ordersAction";
 export {
   fetchCartList,

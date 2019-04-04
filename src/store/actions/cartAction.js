@@ -41,16 +41,15 @@ export const addItemToCart = (orderID, productID, quantity) => {
     }
   };
 };
-export const deleteItemCart = (itemID, history) => {
+export const deleteItemCart = itemID => {
   return async dispatch => {
     try {
       const res = await instance.delete(`items/${itemID}/delete/`);
       const deleteItem = res.data;
       dispatch({
         type: actionTypes.DELETE_ITEM_CART,
-        payload: deleteItem
+        payload: itemID
       });
-      //   history.push("/private");
     } catch (err) {
       console.error("Error while deleteing the cart item", err);
     }

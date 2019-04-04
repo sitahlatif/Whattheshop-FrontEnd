@@ -7,17 +7,16 @@ const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
 });
 
-export const profileDetail = userID => {
+export const profile = () => {
   return async dispatch => {
     try {
-      const res = await instance.get(`profile/${userID}/detail/`);
-      const detailProfile = res.data;
-      console.log(detailProfile);
+      const res = await instance.get("profile/");
+      const Profile = res.data;
       dispatch(resetErrors());
-
+      console.log("heres the profile: ", Profile);
       dispatch({
-        type: actionTypes.PROFILE_DETAIL,
-        payload: detailProfile
+        type: actionTypes.PROFILE,
+        payload: Profile
       });
     } catch (err) {
       dispatch({

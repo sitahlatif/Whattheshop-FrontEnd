@@ -6,19 +6,20 @@ import * as actionCreators from "../../../store/actions/cartAction";
 import { Link } from "react-router-dom";
 
 /* this is just temp im using li to just display it in a list.*/
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 class index extends Component {
   state = {
     quantity: ""
   };
-  // orderID = this.props.profile.user.orders.find(order => order.paid === false);
 
   handleChange = event =>
     this.setState({ [event.target.name]: event.target.value });
   render() {
+    const order = this.props.profile.user.orders.find(
+      order => order.paid === false
+    );
     const { product } = this.props;
     return (
-
       <div className="card col-4">
         <div className="card-body ">
           <img
@@ -26,7 +27,10 @@ class index extends Component {
             className="card-img-top"
             alt="..."
           />
-          <h5 className="card-title">{product.name}</h5>
+          <Link to={`/products/${product.id}`}>
+            <h5 className="card-title">{product.name}</h5>
+          </Link>
+
           <p className="card-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
@@ -47,7 +51,7 @@ class index extends Component {
             href="#"
             onClick={() =>
               this.props.addItemToCart(
-                this.orderID,
+                order.id,
                 product.id,
                 this.state.quantity
               )
@@ -57,9 +61,6 @@ class index extends Component {
             Add to cart
           </a>
         </div>
-      <div>
-        <Link to={`/products/${product.id}`}>{product.name}</Link>
-
       </div>
     );
   }
@@ -85,4 +86,3 @@ export default withRouter(
     mapDispatchToProps
   )(index)
 );
-
