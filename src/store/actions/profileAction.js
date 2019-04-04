@@ -14,6 +14,7 @@ export const profileDetail = userID => {
       const detailProfile = res.data;
       console.log(detailProfile);
       dispatch(resetErrors());
+
       dispatch({
         type: actionTypes.PROFILE_DETAIL,
         payload: detailProfile

@@ -22,8 +22,8 @@ class Login extends Component {
       <div className="col-6 mx-auto">
         <div className="card my-5">
           <div className="card-body">
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
+            <form>
+              <div onSubmit={this.handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"
@@ -35,7 +35,7 @@ class Login extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="form-group">
+              <div class="form-group">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
@@ -47,12 +47,14 @@ class Login extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
-                Login
+              <div class="form-group form-check">
+                <button type="submit" className="btn btn-primary">
+                  Login
+                </button>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Submit
               </button>
-              {/* <Link to="Signup" className="btn btn-link my-2 my-sm-0">
-                Signup for an account
-              </Link> */}
             </form>
           </div>
         </div>

@@ -8,7 +8,9 @@ class Profile extends Component {
       <div>
         <li>Username: {this.props.profile.user.username}</li>
         <li>First Name: {this.props.profile.user.first_name}</li>
-        {/* <li>Address: {this.props.profile.address}</li> */}
+
+        <li>Address: {this.props.profile.address}</li>
+
       </div>
     );
   }

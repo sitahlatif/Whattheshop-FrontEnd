@@ -9,3 +9,9 @@ export { fetchAllProducts, fetchCategories } from "./productsAction";
 
 export { profileDetail, profileUpdate } from "./profileAction";
 export { checkout } from "./ordersAction";
+export {
+  fetchCartList,
+  addItemToCart,
+  deleteItemCart,
+  updateItemCart
+} from "./cartAction";

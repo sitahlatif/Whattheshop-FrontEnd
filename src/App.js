@@ -3,6 +3,7 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import * as actionCreators from "./store/actions";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 // Components
 import ProductsList from "./components/ProductsList";
@@ -11,6 +12,9 @@ import Login from "./components/Authentication/Login";
 import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
+
+import Order from "./components/Order";
+
 import ProfileUpdate from "./components/ProfileUpdate";
 
 class App extends Component {
@@ -28,7 +32,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/login" component={Login} />
-            <Route path="/singup" component={Singup} />
+            <Route path="/signup" component={Singup} />
             <Route path="/logout" component={Logout} />
             {this.props.profile.user && (
               <Route
@@ -40,6 +44,7 @@ class App extends Component {
             )}
 
             <Route path="/products/:productID" component={ProductDetail} />
+
             <Route
               path="/products"
               render={props => (
@@ -47,6 +52,12 @@ class App extends Component {
               )}
             />
 
+            {/* <Route
+              path="/Order"
+              render={props => <Order {...props} order={this.props.profile} />}
+            /> */}
+          </Switch>
+          
             {/* <Redirect to="/" /> */}
           </Switch>
         </div>
