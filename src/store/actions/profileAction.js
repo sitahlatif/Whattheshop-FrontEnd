@@ -13,6 +13,7 @@ export const profileDetail = userID => {
       const res = await instance.get(`profile/${userID}/detail/`);
       const detailProfile = res.data;
       dispatch(resetErrors());
+
       dispatch({
         type: actionTypes.PROFILE_DETAIL,
         payload: detailProfile

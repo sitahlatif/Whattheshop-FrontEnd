@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import * as actionCreators from "./store/actions";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 // Components
 import ProductsList from "./components/ProductsList";
@@ -10,11 +11,13 @@ import Login from "./components/Authentication/Login";
 import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
-
+import Order from "./components/Order";
 class App extends Component {
   componentDidMount = () => {
     this.props.onFetchAllProducts();
-    this.props.onProfileDetail(this.props.user.id);
+    if (this.props.user) {
+      this.props.onProfileDetail(this.props.user.user_id);
+    }
   };
   render() {
     let products = [];
@@ -22,14 +25,39 @@ class App extends Component {
       products = this.props.products;
       return (
         <div>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Singup} />
+            <Route path="/logout" component={Logout} />
+            {this.props.profile.user && (
+              <Route
+                path="/profile"
+                render={props => (
+                  <Profile {...props} profile={this.props.profile} />
+                )}
+              />
+            )}
+
+            <Route path="/products/:productID" component={ProductDetail} />
+
+            <Route
+              path="/products"
+              render={props => (
+                <ProductsList {...props} products={this.props.products} />
+              )}
+            />
+            {/* <Route
+              path="/Order"
+              render={props => <Order {...props} order={this.props.profile} />}
+            /> */}
+          </Switch>
           {/* <ProductsList products={products} />
-          <ProductDetail products={products} /> */}
+          <ProductDetail products={products} />
           <Login />
           <Logout />
           <Singup />
-          {this.props.profile.user && (
-            <Profile profile={this.props.profile.user} />
-          )}
+
+          {this.props.profile.user && <Profile profile={this.props.user} />} */}
         </div>
       );
     }
@@ -51,7 +79,9 @@ const mapDispatchToProps = dispatch => {
     onProfileDetail: userID => dispatch(actionCreators.profileDetail(userID))
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

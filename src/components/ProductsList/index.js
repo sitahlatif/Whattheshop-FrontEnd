@@ -9,7 +9,7 @@ class ProductsList extends Component {
     const productsList = this.props.products.map(product => (
       <ProductListItem key={product.id} product={product} />
     ));
-    return <ul>{productsList}</ul>;
+    return <div>{productsList}</div>;
   }
 }
 function mapStateToProps(state) {

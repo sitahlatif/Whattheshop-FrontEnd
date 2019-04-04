@@ -11,12 +11,12 @@ class ProductDetail extends Component {
           <p>Name: {product.name}</p>
           <p>Price: {product.price}</p>
           <p>Description: {product.description}</p>
-          <p>
+          {/* <p>
             Categories:
             {product.categories.map(category => (
               <p>{category.name}</p>
             ))}
-          </p>
+          </p> */}
           <p>
             Added By:
             {product.added_by}
@@ -29,7 +29,7 @@ class ProductDetail extends Component {
 }
 // function mapStateToProps(state) {
 //   return {
-//     products: state.productsRoot.products
+//     // products: state.productsRoot.products
 //   };
 // }
 
