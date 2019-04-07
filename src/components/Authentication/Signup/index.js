@@ -22,51 +22,57 @@ class Signup extends Component {
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">
-          <div className="card-body">
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+          <h5 className="card-header grey darken-2 white-text text-center py-4">
+            <strong style={{ fontFamily: "fantcy" }}>Sign up</strong>
+          </h5>
+          {/*  */}
+
+          <div className="card-body px-lg-5 pt-0">
+            <form
+              className="m-5"
+              style={{ color: "#757575" }}
+              onSubmit={this.handleSubmit}
+            >
+              <div className="md-form mt-0">
                 <input
                   type="text"
-                  className="form-control"
-                  id="username"
+                  classNameName="form-control"
+                  id="materialRegisterFormFirstName"
                   value={this.state.username}
                   name="username"
                   placeholder="Username"
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  value={this.state.email}
-                  name="email"
-                  placeholder="Email"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <div className="md-form">
                 <input
                   type="password"
-                  className="form-control"
-                  id="password"
+                  classNameName="form-control"
+                  id="materialSubscriptionFormPasswords"
                   value={this.state.password}
                   name="password"
                   placeholder="Password"
                   onChange={this.handleChange}
                 />
+                <div className="md-form">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="materialLoginFormEmail"
+                    value={this.state.email}
+                    name="email"
+                    placeholder="Email"
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
 
-              <button type="submit" className="btn btn-primary">
-                Signup
+              <button
+                className="btn btn-outline-dark btn-rounded btn-block my-4 waves-effect z-depth-0"
+                type="submit"
+              >
+                Sign up
               </button>
-              {/* <Link to="/login" className="btn btn-link my-2 my-sm-0">
-                I already have an account
-              </Link> */}
             </form>
           </div>
         </div>

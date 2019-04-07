@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
-  items: []
+  items: [],
+  loading: true
 };
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,21 +9,47 @@ const cartReducer = (state = initialState, action) => {
       console.log(action.payload);
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
+        loading: false
       };
 
     case actionTypes.ADD_ITEM_CART:
       console.log(action.payload);
-      return {
-        ...state,
-        items: state.items.concat(action.payload)
-      };
+
+      let item = action.payload;
+      let foundItem = state.items.find(
+        theItem =>
+          theItem.orderID === item.orderID &&
+          theItem.productID === item.productID
+      );
+      console.log("[cartReducer.js] foundItem: ", foundItem);
+      if (foundItem) {
+        console.log("[cartReducer.js] ITEM FOUND! ");
+        foundItem.quantity = item.quantity;
+        foundItem.subtotal = item.subtotal;
+        return {
+          ...state,
+          items: [...state.items]
+        };
+      } else {
+        console.log("[cartReducer.js] ITEM NOT FOUND!  :(");
+        return {
+          ...state,
+          items: state.items.concat(item),
+          loading: false
+        };
+      }
+
     case actionTypes.UPDATE_ITEM_CART:
-      let item = state.items.find(item => item.id === action.payload.id);
-      item.quantity = action.payload.quantity;
+      console.log("[cartReducer.js] action.payload: ", action.payload.id);
+      let updatedItem = state.items.find(item => item.id == action.payload.id);
+      console.log("[cartReducer.js] updatedItem: ", updatedItem);
+      updatedItem.quantity = action.payload.quantity;
+      //updatedItem.subtotal = action.payload.subtotal;
       return {
         ...state,
-        items: [...state.items]
+        items: [...state.items],
+        loading: false
       };
     case actionTypes.DELETE_ITEM_CART:
       let newList = state.items.filter(
@@ -30,7 +57,8 @@ const cartReducer = (state = initialState, action) => {
       );
       return {
         ...state,
-        items: [...newList]
+        items: [...newList],
+        loading: false
       };
 
     default:

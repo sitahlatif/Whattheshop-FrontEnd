@@ -11,63 +11,89 @@ import Login from "./components/Authentication/Login";
 import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
+import Loading from "./components/Loading";
 
 // import ProfileUpdate from "./components/ProfileUpdate";
 import Cart from "./components/Cart";
+import HomePage from "./components/HomePage";
+import Welcome from "react-welcome-page";
+import Header from "./components/Header";
 
 class App extends Component {
   componentDidMount = async () => {
     this.props.onFetchAllProducts();
     await this.props.onProfileDetail();
-    this.props.onfetchCartList();
+    await this.props.onfetchCartList();
   };
 
   render() {
-    let products = [];
-    if (this.props.products) {
-      products = this.props.products;
-      return (
-        <div>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Singup} />
-            <Route path="/logout" component={Logout} />
-            <Route
-              path="/profile"
-              render={props => (
-                <Profile {...props} profile={this.props.profile} />
-              )}
-            />
+    // if (this.props.loading) {
+    //   return <Loading />;
+    // } else {
+    return (
+      <div>
+        <Welcome
+          loopDuration={2100}
+          data={[
+            {
+              backgroundColor: "white",
+              textColor: "#EE79EA",
+              imageAnimation: "flipInX",
+              image: require("../src/800x600.gif")
+            },
+            {
+              backgroundColor: "lightgray",
+              text: "Made By Saudis",
+              textColor: "lightgray",
+              imageAnimation: "slideInUp",
+              textAnimation: "slideInLeft",
+              image: require("../src/saaudi.png")
+            }
+          ]}
+        />
+        <Header />
 
-            <Route path="/products/:productID" component={ProductDetail} />
+        <Switch>
+          <Route path="/Home" component={HomePage} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Singup} />
+          <Route path="/logout" component={Logout} />
+          <Route
+            path="/profile"
+            render={props => (
+              <Profile {...props} profile={this.props.profile} />
+            )}
+          />
 
-            <Route
-              path="/products"
-              render={props => (
-                <ProductsList {...props} products={this.props.products} />
-              )}
-            />
-            <Route path="/cart" component={Cart} />
+          <Route path="/products/:productID" component={ProductDetail} />
 
-            {/* <Route
+          <Route
+            path="/products"
+            render={props => (
+              <ProductsList {...props} products={this.props.products} />
+            )}
+          />
+          <Route path="/cart" component={Cart} />
+
+          {/* <Route
               path="/Order"
               render={props => <Order {...props} order={this.props.profile} />}
             /> */}
-          </Switch>
+        </Switch>
 
-          {/* <Redirect to="/" /> */}
-        </div>
-      );
-    }
-    return <div />;
+        {/* <Redirect to="/" /> */}
+      </div>
+    );
   }
 }
+// }
 
 const mapStateToProps = state => {
   return {
     user: state.authRoot.user,
     products: state.productsRoot.products,
-    profile: state.profileRoot.profile
+    profile: state.profileRoot.profile,
+    loading: state.profileRoot.loading
   };
 };
 

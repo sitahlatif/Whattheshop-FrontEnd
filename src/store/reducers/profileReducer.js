@@ -1,7 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  profile: {}
+  profile: {},
+  loading: true
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -9,12 +10,14 @@ const profileReducer = (state = initialState, action) => {
     case actionTypes.PROFILE:
       return {
         ...state,
-        profile: action.payload
+        profile: action.payload,
+        loading: false
       };
     case actionTypes.PROFILE_UPDATE:
       return {
         ...state,
-        profile: { created_on: state.profile.created_on, ...action.payload }
+        profile: { created_on: state.profile.created_on, ...action.payload },
+        loading: false
       };
 
     default:

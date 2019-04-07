@@ -8,7 +8,7 @@ const instance = axios.create({
 export const fetchCartList = () => {
   return async dispatch => {
     try {
-      const res = await instance.get(`order/items/`);
+      const res = await instance.get("order/items/");
       const CartList = res.data;
       dispatch({
         type: actionTypes.FITCH_CART_LIST,
@@ -23,14 +23,13 @@ export const fetchCartList = () => {
 
 export const addItemToCart = (orderID, productID, quantity) => {
   return async dispatch => {
-    // console.log(orderID, productID, quantity);
+    console.log(orderID, productID, quantity);
     try {
       const res = await instance.post(
         `order/${orderID}/items/${productID}/add/`,
         { quantity: quantity }
       );
       const newItem = res.data;
-      console.log(newItem);
       dispatch({
         type: actionTypes.ADD_ITEM_CART,
         payload: newItem
@@ -56,11 +55,14 @@ export const deleteItemCart = itemID => {
   };
 };
 
-export const updateItemCart = (itemID, history) => {
+export const updateItemCart = (itemID, quantity) => {
   return async dispatch => {
     try {
-      const res = await instance.put(`items/${itemID}/update/`);
+      const res = await instance.put(`items/${itemID}/update/`, {
+        quantity: quantity
+      });
       const updateItem = res.data;
+      console.log("[cartAction.js] updateItem: ", updateItem);
       dispatch({
         type: actionTypes.UPDATE_ITEM_CART,
         payload: updateItem

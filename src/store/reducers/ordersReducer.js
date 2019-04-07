@@ -1,7 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  orders: []
+  orders: [],
+  loading: true
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const ordersReducer = (state = initialState, action) => {
     case actionTypes.CHECKOUT:
       return {
         ...state,
-        orders: action.payload
+        orders: action.payload,
+        loading: false
       };
 
     default:

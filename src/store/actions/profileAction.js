@@ -27,10 +27,10 @@ export const profile = () => {
   };
 };
 
-export const profileUpdate = userID => {
+export const profileUpdate = () => {
   return async dispatch => {
     try {
-      const res = await instance.put(`profile/${userID}/update/`);
+      const res = await instance.put("profile/update/");
       const UpdatedProfile = res.data;
       dispatch(resetErrors());
       dispatch({

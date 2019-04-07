@@ -38,7 +38,7 @@ const setCurrentUser = user => ({
   payload: user
 });
 
-export const login = userData => {
+export const login = (userData, history) => {
   console.log(userData);
 
   return async dispatch => {
@@ -47,19 +47,21 @@ export const login = userData => {
       let user = response.data;
       setAuthToken(user.token);
       dispatch(setCurrentUser(jwt_decode(user.token)));
+      history.push("/home");
     } catch (err) {
       console.error("An error occurred", err);
     }
   };
 };
 
-export const signup = userData => {
+export const signup = (userData, history) => {
   return async dispatch => {
     try {
       const response = await instance.post("register/", userData);
       let user = response.data;
       setAuthToken(user.token);
       dispatch(setCurrentUser(jwt_decode(user.token)));
+      history.push("/home");
     } catch (err) {
       console.error(err.response.data);
     }
