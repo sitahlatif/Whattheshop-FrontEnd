@@ -5,6 +5,7 @@ import * as actionCreators from "../../store/actions";
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import Loading from "../Loading";
 
 class Cart extends Component {
   componentDidMount() {
@@ -12,10 +13,15 @@ class Cart extends Component {
   }
 
   render() {
-    const cartsList = this.props.items.map(item => (
-      <CartListItem key={item.id} item={item} />
-    ));
-    const order = this.props.items.find(order => order.paid === false);
+    let cartsList;
+    if (this.props.loading) {
+      cartsList = <Loading />;
+    } else {
+      cartsList = this.props.order.cart_items.map(item => (
+        <CartListItem key={item.id} item={item} />
+      ));
+      // const order = this.props.items.find(order => order.paid === false);
+    }
     console.log(this.order, "caaart");
     return (
       <div>
@@ -46,7 +52,7 @@ class Cart extends Component {
 
                   <div className="total-cost teal">
                     <h6>
-                      Total <span />
+                      Total <span>{this.props.order.total}</span>
                     </h6>
                   </div>
                 </div>
@@ -85,14 +91,15 @@ class Cart extends Component {
 }
 const mapStateToProps = state => {
   return {
-    items: state.cartRoot.items,
-    order: state.ordersRoot.orders
+    order: state.cartRoot.order,
+    // order: state.ordersRoot.orders
+    loading: state.cartRoot.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckout: orderID => dispatch(actionCreators.checkout(orderID)),
+    // onCheckout: orderID => dispatch(actionCreators.checkout(orderID)),
     onfetchCartList: () => dispatch(actionCreators.fetchCartList())
   };
 };

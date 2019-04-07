@@ -31,9 +31,7 @@ class index extends Component {
     if (this.props.loading) {
       order = <Loading />;
     } else {
-      order = this.props.profile.user.orders.find(
-        order => order.paid === false
-      );
+      order = this.props.order;
     }
     console.log(order, "order_id");
     const { product } = this.props;
@@ -80,24 +78,6 @@ class index extends Component {
 
             <div className="">
               {this.state.quantity <= product.stock ? (
-                <Redirect path="/cart">
-                  <a
-                    onClick={() =>
-                      this.props.addItemToCart(
-                        order.id,
-                        product.id,
-                        this.state.quantity
-                      )
-                    }
-                    className="btn btn-dark rounded-circle"
-                  >
-                    <FontAwesomeIcon
-                      icon={faShoppingCart}
-                      className="text-light"
-                    />
-                  </a>
-                </Redirect>
-              ) : (
                 <a
                   onClick={() =>
                     this.props.addItemToCart(
@@ -106,8 +86,15 @@ class index extends Component {
                       this.state.quantity
                     )
                   }
-                  className="btn btn-danger rounded-circle"
+                  className="btn btn-dark rounded-circle"
                 >
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    className="text-light"
+                  />
+                </a>
+              ) : (
+                <a className="btn btn-danger rounded-circle">
                   <FontAwesomeIcon
                     icon={faExclamationCircle}
                     className="text-light"
@@ -135,7 +122,8 @@ const mapStateToProps = state => {
     orders: state.ordersRoot.orders,
     // orderID: state.cartReducer.orderID,
     profile: state.profileRoot.profile,
-    loading: state.profileRoot.loading
+    loading: state.profileRoot.loading,
+    order: state.cartRoot.order
   };
 };
 

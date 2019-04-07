@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
-  items: [],
+  // items: [],
+  order: {},
   loading: true
 };
 const cartReducer = (state = initialState, action) => {
@@ -9,7 +10,7 @@ const cartReducer = (state = initialState, action) => {
       console.log(action.payload);
       return {
         ...state,
-        items: action.payload,
+        order: action.payload,
         loading: false
       };
 
@@ -42,22 +43,24 @@ const cartReducer = (state = initialState, action) => {
 
     case actionTypes.UPDATE_ITEM_CART:
       console.log("[cartReducer.js] action.payload: ", action.payload.id);
-      let updatedItem = state.items.find(item => item.id == action.payload.id);
+      let updatedItem = state.order.cart_items.find(
+        item => item.id == action.payload.id
+      );
       console.log("[cartReducer.js] updatedItem: ", updatedItem);
       updatedItem.quantity = action.payload.quantity;
       //updatedItem.subtotal = action.payload.subtotal;
       return {
         ...state,
-        items: [...state.items],
+        order: { ...state.order },
         loading: false
       };
     case actionTypes.DELETE_ITEM_CART:
-      let newList = state.items.filter(
+      let newList = state.order.cart_items.filter(
         item => item.id !== parseInt(action.payload)
       );
       return {
         ...state,
-        items: [...newList],
+        order: { ...state.order, cart_items: [...newList] },
         loading: false
       };
 
