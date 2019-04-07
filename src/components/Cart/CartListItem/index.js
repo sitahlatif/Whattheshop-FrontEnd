@@ -124,6 +124,17 @@ class index extends Component {
               <td>
                 {" "}
                 <a
+                  onClick={() =>
+                    this.props.updateItemCart(
+                      this.props.item.id,
+                      this.state.quantity
+                    )
+                  }
+                  className="text-danger"
+                >
+                  <p>UPDATE</p>
+                </a>
+                <a
                   onClick={() => this.props.deleteItemCart(this.props.item.id)}
                   className="text-danger"
                 >

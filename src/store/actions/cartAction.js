@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import * as actionTypes from "./actionTypes";
+import * as actionCreatores from "./index";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
@@ -29,6 +30,7 @@ export const addItemToCart = (orderID, productID, quantity) => {
         `order/${orderID}/items/${productID}/add/`,
         { quantity: quantity }
       );
+      dispatch(actionCreatores.fetchAllProducts());
       const newItem = res.data;
       dispatch({
         type: actionTypes.ADD_ITEM_CART,
@@ -45,6 +47,7 @@ export const deleteItemCart = itemID => {
     try {
       const res = await instance.delete(`items/${itemID}/delete/`);
       const deleteItem = res.data;
+      dispatch(fetchCartList());
       dispatch({
         type: actionTypes.DELETE_ITEM_CART,
         payload: itemID
@@ -61,6 +64,7 @@ export const updateItemCart = (itemID, quantity) => {
       const res = await instance.put(`items/${itemID}/update/`, {
         quantity: quantity
       });
+      dispatch(fetchCartList());
       const updateItem = res.data;
       console.log("[cartAction.js] updateItem: ", updateItem);
       dispatch({

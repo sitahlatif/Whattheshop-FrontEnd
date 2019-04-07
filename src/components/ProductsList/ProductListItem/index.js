@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actionCreators from "../../../store/actions/cartAction";
+import * as actionCreators from "../../../store/actions/";
 
 import { Link, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,6 +22,20 @@ class index extends Component {
   state = {
     quantity: ""
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.quantity !== prevState.quantity) {
+      this.props.onFetchAllProducts();
+    }
+    console.log(
+      "[ProductListitem.js] this.state.quantity: ",
+      this.state.quantity
+    );
+    console.log("[ProductListitem.js] prevState: ", prevState);
+    console.log(
+      "[ProductListitem.js] prevState.quantity: ",
+      prevState.quantity
+    );
+  }
 
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -78,28 +92,31 @@ class index extends Component {
 
             <div className="">
               {this.state.quantity <= product.stock ? (
-                <a
-                  onClick={() =>
+                <button
+                  onClick={() => {
                     this.props.addItemToCart(
                       order.id,
                       product.id,
                       this.state.quantity
-                    )
-                  }
+                    );
+                  }}
                   className="btn btn-dark rounded-circle"
                 >
                   <FontAwesomeIcon
                     icon={faShoppingCart}
                     className="text-light"
                   />
-                </a>
+                </button>
               ) : (
-                <a className="btn btn-danger rounded-circle">
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    className="text-light"
-                  />
-                </a>
+                <div>
+                  <p>out of stock</p>
+                  <a className="btn btn-danger rounded-circle">
+                    <FontAwesomeIcon
+                      icon={faExclamationCircle}
+                      className="text-light"
+                    />
+                  </a>
+                </div>
               )}
               <Link to={`/products/${product.id}`}>
                 <a className="btn btn-warning rounded-circle">
@@ -129,6 +146,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts()),
     addItemToCart: (orderID, productID, quantity) =>
       dispatch(actionCreators.addItemToCart(orderID, productID, quantity))
   };

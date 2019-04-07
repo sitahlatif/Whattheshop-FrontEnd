@@ -7,7 +7,7 @@ const instance = axios.create({
 export const checkout = orderID => {
   return async dispatch => {
     try {
-      const res = await instance.post(`order/${orderID}/checkout/`);
+      const res = await instance.put(`order/${orderID}/checkout/`);
       const checkout = res.data;
       dispatch(resetErrors());
       dispatch({

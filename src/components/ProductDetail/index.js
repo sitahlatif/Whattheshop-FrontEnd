@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import Loading from "../Loading";
 import { withRouter } from "react-router-dom";
 import * as actionCreators from "../../store/actions";
+
 class ProductDetail extends Component {
   state = {
     quantity: ""
@@ -24,9 +25,7 @@ class ProductDetail extends Component {
     if (this.props.loading) {
       order = <Loading />;
     } else {
-      order = this.props.profile.user.orders.find(
-        order => order.paid === false
-      );
+      order = order = this.props.order;
     }
     console.log(this.props.products);
     let product = {};
@@ -63,7 +62,9 @@ class ProductDetail extends Component {
           <section className="product-section">
             <div className="container">
               <div className="back-link">
-                <a href="./category.html"> &lt;&lt; Back to Category</a>
+                <Link to="/products">
+                  <h5>Back to Products</h5>
+                </Link>
               </div>
               {/* <p>Name: {product.name}</p>
           <p>Price: {product.price}</p>
@@ -192,22 +193,24 @@ class ProductDetail extends Component {
                     <div className="col-5 mt-5">
                       {this.state.quantity <= product.stock ? (
                         <div>
-                          <a
-                            onClick={() =>
-                              this.props.addItemToCart(
-                                order.id,
-                                product.id,
-                                this.state.quantity
-                              )
-                            }
-                            className="site-btn btn-success text-light"
-                          >
-                            <FontAwesomeIcon
-                              icon={faShoppingCart}
-                              className="text-light"
-                            />
-                            SHOP NOW
-                          </a>
+                          <Link to="/cart">
+                            <button
+                              onClick={() =>
+                                this.props.addItemToCart(
+                                  order.id,
+                                  product.id,
+                                  this.state.quantity
+                                )
+                              }
+                              className="site-btn btn-success text-light"
+                            >
+                              <FontAwesomeIcon
+                                icon={faShoppingCart}
+                                className="text-light"
+                              />
+                              SHOP NOW
+                            </button>
+                          </Link>
                         </div>
                       ) : (
                         <div className="text-light site-btn btn-danger">
@@ -350,7 +353,8 @@ const mapStateToProps = state => {
     // orderID: state.cartReducer.orderID,
     profile: state.profileRoot.profile,
     loading: state.profileRoot.loading,
-    products: state.productsRoot.products
+    products: state.productsRoot.products,
+    order: state.cartRoot.order
   };
 };
 

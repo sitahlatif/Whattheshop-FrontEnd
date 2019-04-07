@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 // Components
 import ProductListItem from "./ProductListItem";
 import * as actionCreators from "../../store/actions";
+import Loading from "../Loading";
 
 class ProductsList extends Component {
   componentDidMount = async () => {
@@ -12,9 +13,14 @@ class ProductsList extends Component {
     // this.props.onfetchCartList();
   };
   render() {
-    const productsList = this.props.products.map(product => (
-      <ProductListItem key={product.id} product={product} />
-    ));
+    let productsList;
+    if (this.props.loading) {
+      productsList = <Loading />;
+    } else {
+      productsList = this.props.products.map(product => (
+        <ProductListItem key={product.id} product={product} />
+      ));
+    }
     return (
       <div>
         <div class="page-top-info">
@@ -245,7 +251,9 @@ class ProductsList extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    loading: state.productsRoot.loading
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -255,6 +263,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProductsList);

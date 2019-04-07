@@ -1,7 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   // items: [],
-  order: {},
+  order: {
+    cart_items: []
+  },
   loading: true
 };
 const cartReducer = (state = initialState, action) => {
@@ -18,7 +20,7 @@ const cartReducer = (state = initialState, action) => {
       console.log(action.payload);
 
       let item = action.payload;
-      let foundItem = state.items.find(
+      let foundItem = state.order.cart_items.find(
         theItem =>
           theItem.orderID === item.orderID &&
           theItem.productID === item.productID
@@ -30,13 +32,16 @@ const cartReducer = (state = initialState, action) => {
         foundItem.subtotal = item.subtotal;
         return {
           ...state,
-          items: [...state.items]
+          order: { ...state.order, cart_items: [...state.order.cart_items] }
         };
       } else {
         console.log("[cartReducer.js] ITEM NOT FOUND!  :(");
         return {
           ...state,
-          items: state.items.concat(item),
+          order: {
+            ...state.order,
+            cart_items: state.order.cart_items.concat(item)
+          },
           loading: false
         };
       }
@@ -51,7 +56,7 @@ const cartReducer = (state = initialState, action) => {
       //updatedItem.subtotal = action.payload.subtotal;
       return {
         ...state,
-        order: { ...state.order },
+        order: { ...state.order, cart_items: [...state.order.cart_items] },
         loading: false
       };
     case actionTypes.DELETE_ITEM_CART:

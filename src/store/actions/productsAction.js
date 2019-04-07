@@ -6,10 +6,12 @@ const instance = axios.create({
 });
 
 export const fetchAllProducts = () => {
+  console.log("[productsAction.js] fetch products called");
   return async dispatch => {
     try {
       const response = await instance.get("products/list/");
       const products = response.data;
+      console.log("[productsAction.js] response.data", products);
       dispatch({
         type: actionTypes.FETCH_ALL_PRODUCTS,
         payload: products
