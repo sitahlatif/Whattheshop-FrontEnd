@@ -27,6 +27,13 @@ export const filterProducts = query => {
     payload: query
   };
 };
+
+export const filterByCategory = category => {
+  return {
+    type: actionTypes.CATEGORY_FILTER,
+    payload: category
+  };
+};
 export const fetchCategories = () => {
   return async dispatch => {
     try {

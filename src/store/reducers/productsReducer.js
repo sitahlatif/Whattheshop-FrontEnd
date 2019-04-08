@@ -48,6 +48,15 @@ const productsReducer = (state = initialState, action) => {
           loading: false
         };
       }
+    case actionTypes.CATEGORY_FILTER:
+      return {
+        ...state,
+        filteredProducts: [...state.products].filter(product =>
+          product.categories
+            .map(category => category.name)
+            .includes(action.payload)
+        )
+      };
     default:
       return state;
   }

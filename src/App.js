@@ -22,6 +22,7 @@ import Header from "./components/Header";
 class App extends Component {
   componentDidMount = async () => {
     this.props.onFetchAllProducts();
+    this.props.onFetchCategories();
     await this.props.onProfileDetail();
     await this.props.onfetchCartList();
   };
@@ -100,6 +101,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts()),
+    onFetchCategories: () => dispatch(actionCreators.fetchCategories()),
     onProfileDetail: () => dispatch(actionCreators.profile()),
     onfetchCartList: () => dispatch(actionCreators.fetchCartList())
   };
