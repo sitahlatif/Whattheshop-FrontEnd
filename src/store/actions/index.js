@@ -5,7 +5,11 @@ export {
   checkForExpiredToken
 } from "./authenticationsAction";
 
-export { fetchAllProducts, fetchCategories } from "./productsAction";
+export {
+  fetchAllProducts,
+  fetchCategories,
+  filterProducts
+} from "./productsAction";
 
 export { profile, profileUpdate } from "./profileAction";
 export { checkout } from "./ordersAction";

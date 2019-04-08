@@ -26,15 +26,15 @@ class index extends Component {
     if (this.state.quantity !== prevState.quantity) {
       this.props.onFetchAllProducts();
     }
-    console.log(
-      "[ProductListitem.js] this.state.quantity: ",
-      this.state.quantity
-    );
-    console.log("[ProductListitem.js] prevState: ", prevState);
-    console.log(
-      "[ProductListitem.js] prevState.quantity: ",
-      prevState.quantity
-    );
+    // console.log(
+    //   "[ProductListitem.js] this.state.quantity: ",
+    //   this.state.quantity
+    // );
+    // console.log("[ProductListitem.js] prevState: ", prevState);
+    // console.log(
+    //   "[ProductListitem.js] prevState.quantity: ",
+    //   prevState.quantity
+    // );
   }
 
   changeHandler = e => {

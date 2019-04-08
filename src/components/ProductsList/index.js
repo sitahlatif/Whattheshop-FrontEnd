@@ -7,10 +7,21 @@ import * as actionCreators from "../../store/actions";
 import Loading from "../Loading";
 
 class ProductsList extends Component {
+  state = {
+    query: ""
+  };
   componentDidMount = async () => {
     this.props.onFetchAllProducts();
     await this.props.onProfileDetail();
     // this.props.onfetchCartList();
+  };
+  componentDidUpdate = prevProps => {
+    console.log("search query: ", this.props.location.state.query);
+    if (this.state.query !== this.props.location.state.query) {
+      console.log("jere");
+      this.props.search(this.props.location.state.query);
+      this.setState({ query: this.props.location.state.query });
+    }
   };
   render() {
     let productsList;
@@ -258,6 +269,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    search: query => dispatch(actionCreators.filterProducts(query)),
     onFetchAllProducts: () => dispatch(actionCreators.fetchAllProducts()),
     onProfileDetail: () => dispatch(actionCreators.profile())
   };

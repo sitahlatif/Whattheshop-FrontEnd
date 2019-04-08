@@ -21,7 +21,12 @@ export const fetchAllProducts = () => {
     }
   };
 };
-
+export const filterProducts = query => {
+  return {
+    type: actionTypes.FILTER_PRODUCTS,
+    payload: query
+  };
+};
 export const fetchCategories = () => {
   return async dispatch => {
     try {

@@ -18,7 +18,7 @@ export const checkout = orderID => {
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data
+        payload: err
       });
     }
   };
