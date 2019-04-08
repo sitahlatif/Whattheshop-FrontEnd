@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 
 class OrderHistory extends Component {
   render() {
-    const history = this.props.user.orders.map(order => (
+    console.log(this.props.order.cart_item, "this is order history");
+    console.log(this.props.profile.user.orders, "this is order history");
+
+    const history = this.props.profile.user.orders.map(order => (
       <div>
         {order.username}
         {order.cart_items}
@@ -18,7 +21,9 @@ class OrderHistory extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.authRoot.user
+    profile: state.profileRoot.profile,
+    user: state.authRoot.user,
+    order: state.cartRoot.order
   };
 };
 
