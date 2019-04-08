@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
-
+import { Redirect } from "react-router-dom";
 class Signup extends Component {
   state = {
     username: "",
@@ -15,10 +15,11 @@ class Signup extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.signup(this.state);
+    this.props.signup(this.state, this.props.history);
   };
 
   render() {
+    if (this.props.user) return <Redirect to="/profile" />;
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">
@@ -66,7 +67,6 @@ class Signup extends Component {
                   />
                 </div>
               </div>
-
               <button
                 className="btn btn-outline-dark btn-rounded btn-block my-4 waves-effect z-depth-0"
                 type="submit"
@@ -83,7 +83,8 @@ class Signup extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signup: userData => dispatch(actionCreators.signup(userData))
+    signup: (userData, history) =>
+      dispatch(actionCreators.signup(userData, history))
   };
 };
 export default connect(

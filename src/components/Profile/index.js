@@ -5,8 +5,17 @@ import OrderHistory from "../OrderHistory";
 import Loading from "../Loading";
 class Profile extends Component {
   componentDidMount = () => {
-    if (this.props.profile)
+    if (this.props.profile) {
       console.log("this is from the profile page", this.props.profile);
+    } else {
+      this.props.profileDetail();
+    }
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.profile !== this.props.profile) {
+      this.props.profileDetail();
+    }
   };
   render() {
     {
@@ -262,7 +271,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    profileDetail: userID => dispatch(actionCreators.profile(userID))
+    profileDetail: () => dispatch(actionCreators.profile())
   };
 };
 export default connect(

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import logo from "../../looogoo.gif";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
 
 class index extends Component {
   render() {
@@ -21,10 +23,23 @@ class index extends Component {
                 <div style={{ width: 40 }} />
                 <div className="col-xl-5 col-lg-6 ml-5 float-right">
                   <div className="user-panel">
-                    <div className="up-item ml-3">
-                      <i className="flaticon-profile" />
-                      <Link to="/login">Sign In</Link>
-                    </div>
+                    {this.props.user ? (
+                      <div className="up-item ml-3">
+                        <i className="flaticon-profile" />
+                        <Link onClick={() => this.props.logout()} to="/home">
+                          Log Out
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="up-item ml-3">
+                        <i className="flaticon-profile" />
+                        <Link to="/login">Sign In</Link>
+                        <div className="up-item ml-3">
+                          <i className="flaticon-profile" />
+                          <Link to="/signup">Sign up</Link>
+                        </div>
+                      </div>
+                    )}
                     <div className="up-item">
                       <div className="shopping-card">
                         <i className="flaticon-bag" />
@@ -121,5 +136,17 @@ class index extends Component {
     );
   }
 }
-
-export default index;
+const mapStateToProps = state => {
+  return {
+    user: state.authRoot.user
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(actionCreators.logout())
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(index);

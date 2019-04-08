@@ -19,10 +19,10 @@ export const profile = () => {
         payload: Profile
       });
     } catch (err) {
-      dispatch({
-        type: actionTypes.SET_ERRORS,
-        payload: err.response.data
-      });
+      // dispatch({
+      //   type: actionTypes.SET_ERRORS,
+      //   payload: err.response.data
+      // });
     }
   };
 };
