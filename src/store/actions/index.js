@@ -8,7 +8,8 @@ export {
 export {
   fetchAllProducts,
   fetchCategories,
-  filterProducts
+  filterProducts,
+  filterByCategory
 } from "./productsAction";
 
 export { profile, profileUpdate } from "./profileAction";

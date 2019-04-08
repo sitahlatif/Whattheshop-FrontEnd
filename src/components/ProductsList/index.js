@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import ProductListItem from "./ProductListItem";
 import * as actionCreators from "../../store/actions";
 import Loading from "../Loading";
-
+import Categories from "./Categories";
 class ProductsList extends Component {
   state = {
     query: ""
@@ -16,11 +16,12 @@ class ProductsList extends Component {
     // this.props.onfetchCartList();
   };
   componentDidUpdate = prevProps => {
-    console.log("search query: ", this.props.location.state.query);
-    if (this.state.query !== this.props.location.state.query) {
-      console.log("jere");
-      this.props.search(this.props.location.state.query);
-      this.setState({ query: this.props.location.state.query });
+    if (this.props.location.state) {
+      if (this.state.query !== this.props.location.state.query) {
+        console.log("jere");
+        this.props.search(this.props.location.state.query);
+        this.setState({ query: this.props.location.state.query });
+      }
     }
   };
   render() {
@@ -48,70 +49,7 @@ class ProductsList extends Component {
               <div className="col-lg-3 order-2 order-lg-1">
                 <div className="filter-widget">
                   <h2 className="fw-title">Categories</h2>
-                  <ul className="category-menu">
-                    <li>
-                      <a href="#">Woman wear</a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a href="#">
-                            Midi Dresses <span>(2)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            Maxi Dresses<span>(56)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            Prom Dresses<span>(36)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            Little Black Dresses <span>(27)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            Mini Dresses<span>(19)</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#">Man Wear</a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a href="#">
-                            Midi Dresses <span>(2)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            Maxi Dresses<span>(56)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            Prom Dresses<span>(36)</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#">Children</a>
-                    </li>
-                    <li>
-                      <a href="#">Bags & Purses</a>
-                    </li>
-                    <li>
-                      <a href="#">Eyewear</a>
-                    </li>
-                    <li>
-                      <a href="#">Footwear</a>
-                    </li>
-                  </ul>
+                  <Categories />
                 </div>
                 <div className="filter-widget mb-0">
                   <h2 className="fw-title">refine by</h2>
