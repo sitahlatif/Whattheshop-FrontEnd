@@ -91,7 +91,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authRoot.user,
-    products: state.productsRoot.products,
+    products: state.productsRoot.filteredProducts,
     profile: state.profileRoot.profile,
     loading: state.profileRoot.loading
   };

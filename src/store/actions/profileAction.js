@@ -21,7 +21,7 @@ export const profile = () => {
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data
+        payload: err
       });
     }
   };
@@ -40,7 +40,7 @@ export const profileUpdate = () => {
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data
+        payload: err
       });
     }
   };

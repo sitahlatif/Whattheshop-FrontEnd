@@ -63,7 +63,7 @@ export const signup = (userData, history) => {
       dispatch(setCurrentUser(jwt_decode(user.token)));
       history.push("/home");
     } catch (err) {
-      console.error(err.response.data);
+      console.error(err);
     }
   };
 };

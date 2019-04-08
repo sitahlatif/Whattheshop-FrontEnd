@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "../../looogoo.gif";
 import { Link } from "react-router-dom";
-
+import SearchBar from "./SearchBar";
 class index extends Component {
   render() {
     return (
@@ -11,12 +11,7 @@ class index extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-xl-6 col-lg-6  ">
-                  <form className="header-search-form">
-                    <input type="text" placeholder="Search on divisima ...." />
-                    <button>
-                      <i className="flaticon-search" />
-                    </button>
-                  </form>
+                  <SearchBar history={this.props.history} />
                 </div>
                 <div style={{ width: 40 }} />
                 <div className="col-xl-5 col-lg-6 ml-5 float-right">
