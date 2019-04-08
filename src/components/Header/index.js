@@ -9,7 +9,7 @@ class index extends Component {
         <header className="header-section">
           <div className="header-top">
             <div className="container">
-              <div className="row">
+              <div className="row col-xl-12 col-lg-12">
                 <div className="col-xl-6 col-lg-6  ">
                   <form className="header-search-form">
                     <input type="text" placeholder="Search on divisima ...." />
@@ -44,15 +44,12 @@ class index extends Component {
 
               backgroundRepeat: "no-repeat"
             }}
+            className="text-center"
           >
-            <img
-              src={logo}
-              alt=""
-              style={{ width: 450, height: 330, marginLeft: 480 }}
-            />
+            <img src={logo} alt="" style={{ width: 450, height: 330 }} />
           </div>
 
-          <nav className="main-navbar">
+          <nav className="main-navbar col-12 col-sm-12">
             <div className="container">
               <ul className="main-menu">
                 <li>

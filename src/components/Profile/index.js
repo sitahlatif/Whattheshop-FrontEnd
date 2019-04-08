@@ -27,9 +27,9 @@ class Profile extends Component {
             <div>
               <div className="container main-secction">
                 <div className="row">
-                  <div className="col-md-12 col-sm-12 col-xs-12 image-section">
+                  {/* <div className="col-md-12 col-sm-12 col-xs-12 image-section">
                     <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg" />
-                  </div>
+                  </div> */}
                   <div className="row user-left-part">
                     <div className="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
                       <div className="row ">
@@ -159,7 +159,7 @@ class Profile extends Component {
                                       <p />
                                     </div>
                                   </div>
-                                  {/* <OrderHistory /> */}
+                                  <OrderHistory />
                                 </div>
                               </div>
                             </div>
