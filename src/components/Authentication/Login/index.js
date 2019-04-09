@@ -18,6 +18,7 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.props.login(this.state, this.props.history);
   };
 
   handleChange = event => {
@@ -29,7 +30,6 @@ class Login extends Component {
     console.error("[Login.js]: ", errors);
 
     if (this.props.user) {
-      this.props.ProfileDetail();
       return <Redirect to="/profile" />;
     }
     return (
@@ -125,8 +125,8 @@ const mapDispatchToProps = dispatch => {
   return {
     login: (userData, history) =>
       dispatch(actionCreators.login(userData, history)),
-    resetErrors: () => dispatch(actionCreators.resetErrors()),
-    ProfileDetail: () => dispatch(actionCreators.profile())
+    resetErrors: () => dispatch(actionCreators.resetErrors())
+    // ProfileDetail: () => dispatch(actionCreators.profile())
   };
 };
 
