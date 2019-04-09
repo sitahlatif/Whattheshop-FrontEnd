@@ -2,6 +2,7 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import * as actionCreators from "./";
+import { setErrors } from "./errors";
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
 });
@@ -39,7 +40,7 @@ const setCurrentUser = user => ({
 });
 
 export const login = (userData, history) => {
-  console.log(userData);
+  console.log("[authenticationsAction.js] userData: ", userData);
 
   return async dispatch => {
     try {
@@ -51,6 +52,10 @@ export const login = (userData, history) => {
       history.push("/profile");
     } catch (err) {
       console.error("An error occurred", err);
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data
+      });
     }
   };
 };
@@ -65,7 +70,11 @@ export const signup = (userData, history) => {
       dispatch(actionCreators.profile());
       history.push("/profile");
     } catch (err) {
-      // console.error(err.response.data);
+      console.error("An error occurred", err);
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data
+      });
     }
   };
 };

@@ -29,6 +29,14 @@ class index extends Component {
                         <Link onClick={() => this.props.logout()} to="/home">
                           Log Out
                         </Link>
+
+                        <div className="up-item">
+                          <div className="shopping-card">
+                            <i className="flaticon-bag" />
+                            <span>0</span>
+                          </div>
+                          <a href="#">Shopping Cart</a>
+                        </div>
                       </div>
                     ) : (
                       <div className="up-item ml-3">
@@ -40,13 +48,6 @@ class index extends Component {
                         </div>
                       </div>
                     )}
-                    <div className="up-item">
-                      <div className="shopping-card">
-                        <i className="flaticon-bag" />
-                        <span>0</span>
-                      </div>
-                      <a href="#">Shopping Cart</a>
-                    </div>
                   </div>
                 </div>
               </div>
