@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 function mapStateToProps(state) {
   return {};
 }
@@ -26,22 +28,27 @@ class index extends Component {
   render() {
     return (
       <form className="header-search-form" onSubmit={this.handleSubmit}>
-        <input
-          name="query"
-          type="text"
-          placeholder="Search on divisima ...."
-          onChange={this.handleChange}
-        />
-        <Link
-          to={{
-            pathname: "/products",
-            state: {
-              query: this.state.query
-            }
-          }}
-        >
-          <i className="flaticon-search" />
-        </Link>
+        <div>
+          <input
+            name="query"
+            type="text"
+            placeholder="Search on products ...."
+            onChange={this.handleChange}
+          />
+          <Link
+            to={{
+              pathname: "/products",
+              state: {
+                query: this.state.query
+              }
+            }}
+          >
+            <button>
+              {/* <i class="flaticon-search" /> */}
+              <FontAwesomeIcon icon={faSearch} className="text-dark" />
+            </button>
+          </Link>
+        </div>
       </form>
     );
   }
