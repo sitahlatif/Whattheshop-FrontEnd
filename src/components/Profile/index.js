@@ -18,7 +18,15 @@ class Profile extends Component {
   };
 
   componentDidMount = () => {
-    if (this.props.profile) this.props.profileDetail();
+        if (!this.props.profile) this.props.profileDetail();
+
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.profile !== this.props.profile) {
+      this.props.profileDetail();
+    }
+
   };
   handleSubmit = event => {
     event.preventDefault();
@@ -402,7 +410,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    profileDetail: userID => dispatch(actionCreators.profile(userID)),
+    profileDetail: () => dispatch(actionCreators.profile()),
+
     profileUpdate: (userDate, profileDate) =>
       dispatch(actionCreators.profileUpdate(userDate, profileDate))
   };

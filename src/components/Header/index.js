@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import logo from "../../looogoo.gif";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
 import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 
 class index extends Component {
   render() {
@@ -19,17 +22,31 @@ class index extends Component {
 
                 <div className="col-xl-3 col-lg-3  float-right">
                   <div className="user-panel">
-                    <div className="up-item ml-3">
-                      <i className="flaticon-profile" />
-                      <Link to="/login">Sign In</Link>
-                    </div>
-                    <div className="up-item">
-                      <div className="shopping-card">
-                        <i className="flaticon-bag" />
-                        <span>0</span>
+                    {this.props.user ? (
+                      <div className="up-item ml-3">
+                        <i className="flaticon-profile" />
+                        <Link onClick={() => this.props.logout()} to="/home">
+                          Log Out
+                        </Link>
+
+                        <div className="up-item">
+                          <div className="shopping-card">
+                            <i className="flaticon-bag" />
+                            <span>0</span>
+                          </div>
+                          <a href="#">Shopping Cart</a>
+                        </div>
                       </div>
-                      <a href="#">Shopping Cart</a>
-                    </div>
+                    ) : (
+                      <div className="up-item ml-3">
+                        <i className="flaticon-profile" />
+                        <Link to="/login">Sign In</Link>
+                        <div className="up-item ml-3">
+                          <i className="flaticon-profile" />
+                          <Link to="/signup">Sign up</Link>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -118,5 +135,17 @@ class index extends Component {
     );
   }
 }
-
-export default index;
+const mapStateToProps = state => {
+  return {
+    user: state.authRoot.user
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(actionCreators.logout())
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(index);

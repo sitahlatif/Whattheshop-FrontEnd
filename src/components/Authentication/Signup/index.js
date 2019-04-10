@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
-
+import { Redirect } from "react-router-dom";
 class Signup extends Component {
   state = {
     username: "",
@@ -10,6 +10,9 @@ class Signup extends Component {
     password: ""
   };
 
+  componentWillUnmount() {
+    if (this.props.errors.length) this.props.resetErrors();
+  }
   handleChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
@@ -19,9 +22,21 @@ class Signup extends Component {
   };
 
   render() {
+    const { username, password, email } = this.state;
+    const errors = this.props.errors;
+    console.error("[Signup.js]: ", errors);
+
+    if (this.props.user) return <Redirect to="/profile" />;
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">
+          {!!errors.length && (
+            <div className="alert alert-danger" role="alert">
+              {errors.map(error => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          )}
           <h5 className="card-header grey darken-2 white-text text-center py-4">
             <strong style={{ fontFamily: "fantcy" }}>Sign up</strong>
           </h5>
@@ -38,7 +53,7 @@ class Signup extends Component {
                   type="text"
                   classNameName="form-control"
                   id="materialRegisterFormFirstName"
-                  value={this.state.username}
+                  value={username}
                   name="username"
                   placeholder="Username"
                   onChange={this.handleChange}
@@ -49,7 +64,7 @@ class Signup extends Component {
                   type="password"
                   classNameName="form-control"
                   id="materialSubscriptionFormPasswords"
-                  value={this.state.password}
+                  value={password}
                   name="password"
                   placeholder="Password"
                   onChange={this.handleChange}
@@ -59,17 +74,19 @@ class Signup extends Component {
                     type="email"
                     className="form-control"
                     id="materialLoginFormEmail"
-                    value={this.state.email}
+                    value={email}
                     name="email"
                     placeholder="Email"
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
-
               <button
                 className="btn btn-outline-dark btn-rounded btn-block my-4 waves-effect z-depth-0"
                 type="submit"
+                onClick={() =>
+                  this.props.signup(this.state, this.props.history)
+                }
               >
                 Sign up
               </button>
@@ -80,14 +97,22 @@ class Signup extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    user: state.authRoot.user,
+    errors: state.rootErrors.errors
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     signup: (userData, history) =>
-      dispatch(actionCreators.signup(userData, history))
+
+      dispatch(actionCreators.signup(userData, history)),
+    resetErrors: () => dispatch(actionCreators.resetErrors())
+ 
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Signup);

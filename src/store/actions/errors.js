@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+
 export const setErrors = errors => ({
   type: actionTypes.SET_ERRORS,
   payload: errors
@@ -6,7 +7,7 @@ export const setErrors = errors => ({
 
 export const resetErrors = () => {
   return {
-    type: actionTypes.SET_ERRORS,
+    type: actionTypes.RESET_ERRORS,
     payload: []
   };
 };

@@ -20,3 +20,4 @@ export {
   deleteItemCart,
   updateItemCart
 } from "./cartAction";
+export { resetErrors, setErrors } from "./errors";

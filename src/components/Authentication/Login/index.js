@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import * as actionCreators from "../../../store/actions";
+
+import { from } from "rxjs";
 
 class Login extends Component {
   state = {
@@ -8,59 +12,39 @@ class Login extends Component {
     password: ""
   };
 
+  componentWillUnmount() {
+    if (this.props.errors.length) this.props.resetErrors();
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     this.props.login(this.state, this.props.history);
   };
 
-  handleChange = event =>
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
   render() {
     const { username, password } = this.state;
+    const errors = this.props.errors;
+    console.error("[Login.js]: ", errors);
 
+    if (this.props.user) {
+      return <Redirect to="/profile" />;
+    }
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">
+          {!!errors.length && (
+            <div className="alert alert-danger" role="alert">
+              {errors.map(error => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          )}
           <h5 className="card-header grey darken-2 white-text text-center py-4">
             <strong style={{ fontFamily: "fantcy" }}>Sign in</strong>
           </h5>
-          {/* <div className="card-body">
-            <form>
-              <div onSubmit={this.handleSubmit}>
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="username"
-                  value={username}
-                  name="username"
-                  placeholder="Username"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div class="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  value={password}
-                  name="password"
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div class="form-group form-check">
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
-              </div>
-              <button type="submit" class="btn btn-primary">
-                Submit
-              </button>
-            </form>
-          </div> */}
-
           <div className="card-body px-lg-5 pt-0">
             <form
               className="text-center"
@@ -118,14 +102,10 @@ class Login extends Component {
               <button
                 className="btn btn-outline-dark btn-rounded btn-block my-4 waves-effect z-depth-0"
                 type="submit"
+                onClick={() => this.props.login(this.state, this.props.history)}
               >
                 Sign in
               </button>
-
-              <p>
-                Not a member?
-                <a href="">Register</a>
-              </p>
             </form>
           </div>
         </div>
@@ -134,12 +114,23 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  login: (userData, history) =>
-    dispatch(actionCreators.login(userData, history))
-});
+const mapStateToProps = state => {
+  return {
+    user: state.authRoot.user,
+    errors: state.rootErrors.errors
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (userData, history) =>
+      dispatch(actionCreators.login(userData, history)),
+    resetErrors: () => dispatch(actionCreators.resetErrors())
+    // ProfileDetail: () => dispatch(actionCreators.profile())
+  };
+};
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);

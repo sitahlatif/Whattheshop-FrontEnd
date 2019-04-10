@@ -21,8 +21,9 @@ export const profile = () => {
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err
+        payload: err.response.data
       });
+
     }
   };
 };
