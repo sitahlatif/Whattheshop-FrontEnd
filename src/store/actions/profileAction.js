@@ -12,35 +12,40 @@ export const profile = () => {
     try {
       const res = await instance.get("profile/");
       const Profile = res.data;
-      dispatch(resetErrors());
+      // dispatch(resetErrors());
       console.log("heres the profile: ", Profile);
       dispatch({
         type: actionTypes.PROFILE,
         payload: Profile
       });
     } catch (err) {
-      // dispatch({
-      //   type: actionTypes.SET_ERRORS,
-      //   payload: err.response.data
-      // });
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data
+      });
+
     }
   };
 };
 
-export const profileUpdate = () => {
+export const profileUpdate = (userData, profileData) => {
   return async dispatch => {
     try {
-      const res = await instance.put("profile/update/");
+      const res = await instance.put("profile/update/", {
+        user: { ...userData },
+        profile: { ...profileData }
+      });
       const UpdatedProfile = res.data;
-      dispatch(resetErrors());
+      console.log(UpdatedProfile, "here is the profile update action");
       dispatch({
         type: actionTypes.PROFILE_UPDATE,
         payload: UpdatedProfile
       });
+      dispatch(profile());
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data
+        payload: err
       });
     }
   };

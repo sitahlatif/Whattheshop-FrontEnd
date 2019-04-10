@@ -106,8 +106,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     signup: (userData, history) =>
+
       dispatch(actionCreators.signup(userData, history)),
     resetErrors: () => dispatch(actionCreators.resetErrors())
+ 
   };
 };
 export default connect(

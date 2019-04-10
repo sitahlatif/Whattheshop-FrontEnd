@@ -26,15 +26,15 @@ class index extends Component {
     if (this.state.quantity !== prevState.quantity) {
       this.props.onFetchAllProducts();
     }
-    console.log(
-      "[ProductListitem.js] this.state.quantity: ",
-      this.state.quantity
-    );
-    console.log("[ProductListitem.js] prevState: ", prevState);
-    console.log(
-      "[ProductListitem.js] prevState.quantity: ",
-      prevState.quantity
-    );
+    // console.log(
+    //   "[ProductListitem.js] this.state.quantity: ",
+    //   this.state.quantity
+    // );
+    // console.log("[ProductListitem.js] prevState: ", prevState);
+    // console.log(
+    //   "[ProductListitem.js] prevState.quantity: ",
+    //   prevState.quantity
+    // );
   }
 
   changeHandler = e => {
@@ -79,34 +79,40 @@ class index extends Component {
 
             <p className="card-text">Added By {product.added_by}</p>
             <p className="card-text">Stock {product.stock}</p>
-            <form>
-              <input
-                className="form-control"
-                type="text"
-                placeholder="quantity"
-                name="quantity"
-                value={this.state.quantity}
-                onChange={this.changeHandler}
-              />
-            </form>
 
             <div className="">
               {this.state.quantity <= product.stock ? (
-                <button
-                  onClick={() => {
-                    this.props.addItemToCart(
-                      order.id,
-                      product.id,
-                      this.state.quantity
-                    );
-                  }}
-                  className="btn btn-dark rounded-circle"
-                >
-                  <FontAwesomeIcon
-                    icon={faShoppingCart}
-                    className="text-light"
-                  />
-                </button>
+                <div>
+                  <form>
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="quantity"
+                      name="quantity"
+                      value={this.state.quantity}
+                      onChange={this.changeHandler}
+                    />
+                  </form>
+                  <button
+                    onClick={() => {
+                      this.props.addItemToCart(
+                        order.id,
+                        product.id,
+                        this.state.quantity
+                      );
+                    }}
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#modalAbandonedCart"
+                    className="btn btn-dark rounded-circle"
+                  >
+                    <FontAwesomeIcon
+                      icon={faShoppingCart}
+                      className="text-light"
+                    />
+                  </button>
+                </div>
               ) : (
                 <div>
                   <p>out of stock</p>
@@ -126,6 +132,58 @@ class index extends Component {
               <a className="btn btn-danger rounded-circle">
                 <FontAwesomeIcon icon={faHeart} className="text-light" />
               </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="modal fade right"
+          id="modalAbandonedCart"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel"
+          aria-hidden="true"
+          data-backdrop="false"
+        >
+          <div
+            className="modal-dialog modal-frame modal-top modal-notify modal-success"
+            role="document"
+            style={{ maxWidth: "100%", backgroundColor: "gray" }}
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <p className="heading">
+                  Successfuly Added Product to the cart..!
+                </p>
+                <Link to="/cart">
+                  <a type="button" className="btn btn-success">
+                    <FontAwesomeIcon
+                      icon={faShoppingCart}
+                      className="text-light"
+                    />
+                    Go to cart
+                  </a>
+                </Link>
+
+                <a
+                  type="button"
+                  className="btn btn-danger waves-effect"
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </a>
+
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true" className="white-text">
+                    &times;
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -21,7 +21,19 @@ export const fetchAllProducts = () => {
     }
   };
 };
+export const filterProducts = query => {
+  return {
+    type: actionTypes.FILTER_PRODUCTS,
+    payload: query
+  };
+};
 
+export const filterByCategory = category => {
+  return {
+    type: actionTypes.CATEGORY_FILTER,
+    payload: category
+  };
+};
 export const fetchCategories = () => {
   return async dispatch => {
     try {

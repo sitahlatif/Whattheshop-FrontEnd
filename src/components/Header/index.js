@@ -3,6 +3,10 @@ import logo from "../../looogoo.gif";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
+import SearchBar from "./SearchBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 
 class index extends Component {
   render() {
@@ -11,17 +15,12 @@ class index extends Component {
         <header className="header-section">
           <div className="header-top">
             <div className="container">
-              <div className="row">
-                <div className="col-xl-6 col-lg-6  ">
-                  <form className="header-search-form">
-                    <input type="text" placeholder="Search on divisima ...." />
-                    <button>
-                      <i className="flaticon-search" />
-                    </button>
-                  </form>
+              <div className="row col-xl-12 col-lg-12">
+                <div className="col-xl-9 col-lg-9  ">
+                  <SearchBar history={this.props.history} />
                 </div>
-                <div style={{ width: 40 }} />
-                <div className="col-xl-5 col-lg-6 ml-5 float-right">
+
+                <div className="col-xl-3 col-lg-3  float-right">
                   <div className="user-panel">
                     {this.props.user ? (
                       <div className="up-item ml-3">
@@ -56,23 +55,22 @@ class index extends Component {
           {/* */}
           <div
             style={{
-              backgroundImage: "url(img/bg.gif)",
+              backgroundImage: "url(img/simple2.gif)",
 
-              backgroundRepeat: "no-repeat"
+              backgroundRepeat: "no-repeat",
+              height: "450px"
             }}
+            className="text-center col-12"
           >
-            <img
-              src={logo}
-              alt=""
-              style={{ width: 450, height: 330, marginLeft: 480 }}
-            />
+            {/* <img src={logo} alt=""  /> */}
           </div>
 
-          <nav className="main-navbar">
+          <nav className="main-navbar col-12 col-sm-12">
             <div className="container">
-              <ul className="main-menu">
-                <li>
-                  <Link to="/home">Home</Link>
+              <ul className="main-menu text-secondary">
+                <li className="text-secondary">
+                  <FontAwesomeIcon icon={faHome} className="text-secondary" />
+                  <Link to="/home"> Home</Link>
                 </li>
                 <li>
                   <a href="#">Women</a>

@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../Loading";
+import { Link, Redirect } from "react-router-dom";
 
 class Cart extends Component {
   componentDidMount() {
@@ -25,10 +26,10 @@ class Cart extends Component {
     console.log(this.order, "caaart");
     return (
       <div>
-        <div className="page-top-info">
+        <div className="page-top-info ">
           <div className="container">
             <h4>Your cart</h4>
-            <div className="site-pagination">
+            <div className="site-pagination ">
               <a href="">Home</a> /<a href="">Your cart</a>
             </div>
           </div>
@@ -62,12 +63,16 @@ class Cart extends Component {
                   <input type="text" placeholder="Enter promo code" />
                   <button className="text-dark">Submit</button>
                 </form>
-                <a href="" className="site-btn btn-warning">
-                  Proceed to checkout
-                </a>
-                <a href="" className="site-btn sb-dark">
-                  Continue shopping
-                </a>
+                <Link to="/checkout">
+                  <a href="" className="site-btn btn-warning">
+                    Proceed to checkout
+                  </a>
+                </Link>
+                <Link to="/products">
+                  <a href="" className="site-btn sb-dark">
+                    Continue shopping
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
