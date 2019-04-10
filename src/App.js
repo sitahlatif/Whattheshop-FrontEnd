@@ -13,11 +13,12 @@ import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
 import Loading from "./components/Loading";
 
-// import ProfileUpdate from "./components/ProfileUpdate";
+import ProfileUpdate from "./components/ProfileUpdate";
 import Cart from "./components/Cart";
 import HomePage from "./components/HomePage";
 import Welcome from "react-welcome-page";
 import Header from "./components/Header";
+import Checkout from "./components/Checkout";
 
 class App extends Component {
   componentDidMount = async () => {
@@ -59,10 +60,17 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Singup} />
           <Route path="/logout" component={Logout} />
+          <Route path="/checkout" component={Checkout} />
           <Route
             path="/profile"
             render={props => (
               <Profile {...props} profile={this.props.profile} />
+            )}
+          />
+          <Route
+            path="/updateprofile"
+            render={props => (
+              <ProfileUpdate {...props} profile={this.props.profile} />
             )}
           />
 
