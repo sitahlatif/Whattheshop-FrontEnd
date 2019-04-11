@@ -14,7 +14,7 @@ import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
   state = {
-    quantity: ""
+    quantity: 0
   };
 
   changeHandler = e => {
@@ -25,7 +25,7 @@ class ProductDetail extends Component {
     if (this.props.loading) {
       order = <Loading />;
     } else {
-      order = order = this.props.order;
+      order = this.props.order;
     }
     console.log(this.props.products);
     let product = {};
@@ -71,14 +71,13 @@ class ProductDetail extends Component {
           <p>Description: {product.description}</p>
        
           </p> */}{" "}
-              {/* */}
               <div className="row">
                 <div className="col-lg-6">
                   <div className="product-pic-zoom">
                     <img
                       role="presentation"
                       alt=""
-                      src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                      src={product.images[0].image}
                       className="zoomImg "
                       style={{
                         //   position: "absolute",
@@ -103,47 +102,30 @@ class ProductDetail extends Component {
                         className="pt active"
                         data-imgbigurl="img/single-product/1.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/2.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/3.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/4.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/4.jpg"
-                      >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
-                      </div>
+                      />
                     </div>
                   </div>
                 </div>
@@ -152,11 +134,11 @@ class ProductDetail extends Component {
                   <h2 className="p-title">{product.name}</h2>
                   <p>
                     Added By:
-                    {product.added_by}
+                    {product.added_by.username}
                   </p>
                   <h3 className="p-price">SR {product.price}</h3>
                   <h4 className="p-stock">
-                    Available: <span>In Stock: {product.stock}</span>
+                    Available: <span>in Stock {product.stock}</span>
                   </h4>
                   <h4 className="p-stock">
                     Categories:
@@ -241,14 +223,6 @@ class ProductDetail extends Component {
                       >
                         <div className="panel-body">
                           <p>{product.description}</p>
-                          <p>
-                            Approx length 66cm/26" (Based on a UK size 8 sample)
-                          </p>
-                          <p>Mixed fibres</p>
-                          <p>
-                            The Model wears a UK size 8/ EU size 36/ US size 4
-                            and her height is 5'8"
-                          </p>
                         </div>
                       </div>
                     </div>
@@ -271,7 +245,7 @@ class ProductDetail extends Component {
                         data-parent="#accordion"
                       >
                         <div className="panel-body">
-                          <img src="./img/cards.png" alt="" />
+                          <img src={product.images[0].image} alt="" />
                           <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Proin pharetra tempor so dales. Phasellus

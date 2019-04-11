@@ -21,16 +21,15 @@ class Cart extends Component {
       cartsList = this.props.order.cart_items.map(item => (
         <CartListItem key={item.id} item={item} />
       ));
-      // const order = this.props.items.find(order => order.paid === false);
     }
-    console.log(this.order, "caaart");
+
     return (
       <div>
         <div className="page-top-info ">
           <div className="container">
             <h4>Your cart</h4>
             <div className="site-pagination ">
-              <a href="">Home</a> /<a href="">Your cart</a>
+              <Link to="/">Home</Link> /<Link to="/cart">Your cart</Link>
             </div>
           </div>
         </div>
@@ -64,32 +63,17 @@ class Cart extends Component {
                   <button className="text-dark">Submit</button>
                 </form>
                 <Link to="/checkout">
-                  <a href="" className="site-btn btn-warning">
+                  <div className="site-btn btn-warning">
                     Proceed to checkout
-                  </a>
+                  </div>
                 </Link>
                 <Link to="/products">
-                  <a href="" className="site-btn sb-dark">
-                    Continue shopping
-                  </a>
+                  <div className="site-btn sb-dark">Continue shopping</div>
                 </Link>
               </div>
             </div>
           </div>
         </section>
-
-        <button
-          className="btn btn-danger m-2"
-          // onClick={this.props.onCheckout(this.props.items.order)}
-        >
-          Back to shopping
-        </button>
-        {/* <button
-          className="btn btn-dark m-2"
-          onClick={this.props.onCheckout(this.props.items.order)}
-        >
-          Checkout
-        </button> */}
       </div>
     );
   }

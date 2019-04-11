@@ -7,55 +7,12 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
 class index extends Component {
   render() {
     const categoriesList = this.props.categories.map(category => (
       <Category key={category.name} categoryName={category.name} />
     ));
-    return (
-      <ul className="category-menu">
-        {categoriesList}
-        {/* <li>
-          <a href="#">Woman wear</a>
-        </li>
-        <li>
-          <a href="#">Man Wear</a>
-          <ul className="sub-menu">
-            <li>
-              <a href="#">
-                Midi Dresses <span>(2)</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Maxi Dresses<span>(56)</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Prom Dresses<span>(36)</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Children</a>
-        </li>
-        <li>
-          <a href="#">Bags & Purses</a>
-        </li>
-        <li>
-          <a href="#">Eyewear</a>
-        </li>
-        <li>
-          <a href="#">Footwear</a>
-        </li> */}
-      </ul>
-    );
+    return <ul className="category-menu">{categoriesList}</ul>;
   }
 }
 
