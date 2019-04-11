@@ -63,11 +63,16 @@ class Cart extends Component {
                   <input type="text" placeholder="Enter promo code" />
                   <button className="text-dark">Submit</button>
                 </form>
-                <Link to="/checkout">
-                  <a href="" className="site-btn btn-warning">
-                    Proceed to checkout
-                  </a>
-                </Link>
+                {this.props.user ? (
+                  <Link to="/checkout">
+                    <a href="" className="site-btn btn-warning">
+                      Proceed to checkout
+                    </a>
+                  </Link>
+                ) : (
+                  <Link to="/login" />
+                )}
+
                 <Link to="/products">
                   <a href="" className="site-btn sb-dark">
                     Continue shopping
@@ -97,7 +102,7 @@ class Cart extends Component {
 const mapStateToProps = state => {
   return {
     order: state.cartRoot.order,
-    // order: state.ordersRoot.orders
+    user: state.authRoot.user,
     loading: state.cartRoot.loading
   };
 };
