@@ -12,17 +12,18 @@ export const profile = () => {
     try {
       const res = await instance.get("profile/");
       const Profile = res.data;
-      // dispatch(resetErrors());
+      dispatch(resetErrors());
       console.log("heres the profile: ", Profile);
       dispatch({
         type: actionTypes.PROFILE,
         payload: Profile
       });
     } catch (err) {
-      // dispatch({
-      //   type: actionTypes.SET_ERRORS,
-      //   payload: err
-      // });
+
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data
+      });
     }
   };
 };

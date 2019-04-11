@@ -19,6 +19,18 @@ class Profile extends Component {
 
   componentDidMount = () => {
     if (!this.props.profile) this.props.profileDetail();
+
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    // if (this.props.profile) {
+    console.log("jwewe");
+    this.props.profileUpdate(this.state.user, this.state.profile);
+    //
+  };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -41,7 +53,7 @@ class Profile extends Component {
               </h3>
               <input id="radio1" type="radio" name="css-tabs" checked />
               <input id="radio2" type="radio" name="css-tabs" />
-              <input id="radio3" type="radio" name="css-tabs" />
+
               <input id="radio4" type="radio" name="css-tabs" />
               <div id="tabs">
                 <label id="tab1" for="radio1">
@@ -49,9 +61,6 @@ class Profile extends Component {
                 </label>
                 <label id="tab2" for="radio2">
                   My Order
-                </label>
-                <label id="tab3" for="radio3">
-                  Locations
                 </label>
                 <label id="tab4" for="radio4">
                   Settings
@@ -121,18 +130,6 @@ class Profile extends Component {
                   </h3>
 
                   <OrderHistory />
-                </section>
-                <section id="content3">
-                  <h3>Interesting Heading Text</h3>
-                  <p>
-                    Fusce pulvinar porttitor dui, eget ultrices nulla tincidunt
-                    vel. Suspendisse faucibus lacinia tellus, et viverra ligula.
-                    Suspendisse eget ipsum auctor, congue metus vel, dictum
-                    erat. Aenean tristique euismod molestie. Nulla rutrum
-                    accumsan nisl, ac semper sapien tincidunt et. Praesent
-                    tortor risus, commodo et sagittis nec, aliquam quis augue.
-                    Aenean non elit elementum, tempor metus at, aliquam felis.
-                  </p>
                 </section>
                 <section id="content4" className="m-5 ">
                   <h3>Edit Your Profile Information:</h3>

@@ -129,65 +129,6 @@ class ProductsList extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="filter-widget mb-0">
-                  <h2 className="fw-title">Size</h2>
-                  <div className="fw-size-choose">
-                    <div className="sc-item">
-                      <input type="radio" name="sc" id="xs-size" />
-                      <label for="xs-size">XS</label>
-                    </div>
-                    <div className="sc-item">
-                      <input type="radio" name="sc" id="s-size" />
-                      <label for="s-size">S</label>
-                    </div>
-                    <div className="sc-item">
-                      <input type="radio" name="sc" id="m-size" checked="" />
-                      <label for="m-size">M</label>
-                    </div>
-                    <div className="sc-item">
-                      <input type="radio" name="sc" id="l-size" />
-                      <label for="l-size">L</label>
-                    </div>
-                    <div className="sc-item">
-                      <input type="radio" name="sc" id="xl-size" />
-                      <label for="xl-size">XL</label>
-                    </div>
-                    <div className="sc-item">
-                      <input type="radio" name="sc" id="xxl-size" />
-                      <label for="xxl-size">XXL</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="filter-widget">
-                  <h2 className="fw-title">Brand</h2>
-                  <ul className="category-menu">
-                    <li>
-                      <a href="#">
-                        Abercrombie & Fitch <span>(2)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Asos<span>(56)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Bershka<span>(36)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Missguided<span>(27)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Zara<span>(19)</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
               <div className="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0 ">
                 <div className="row">{productsList}</div>
