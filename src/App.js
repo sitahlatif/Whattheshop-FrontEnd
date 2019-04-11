@@ -12,13 +12,14 @@ import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
 import Loading from "./components/Loading";
-
+import ThankYou from "./components/ThankYou";
 import ProfileUpdate from "./components/ProfileUpdate";
 import Cart from "./components/Cart";
 import HomePage from "./components/HomePage";
 import Welcome from "react-welcome-page";
 import Header from "./components/Header";
 import Checkout from "./components/Checkout";
+import NotFound from "./components/NotFound";
 
 class App extends Component {
   componentDidMount = async () => {
@@ -57,10 +58,10 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Singup} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/checkout" component={Checkout} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Singup} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/checkout" component={Checkout} />
           <Route
             path="/profile"
             render={props => (
@@ -82,13 +83,10 @@ class App extends Component {
               <ProductsList {...props} products={this.props.products} />
             )}
           />
-          <Route path="/cart" component={Cart} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/thank-you" component={ThankYou} />
 
-          {/* <Route
-              path="/Order"
-              render={props => <Order {...props} order={this.props.profile} />}
-            /> */}
-          {/* <Redirect to="/" /> */}
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     );

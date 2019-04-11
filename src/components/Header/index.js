@@ -6,36 +6,44 @@ import * as actionCreators from "../../store/actions";
 import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import Category from "../ProductsList/Categories/Category";
 
 class index extends Component {
   render() {
+
     let itemQuantity = 0;
     this.props.order.cart_items.forEach(
       item => (itemQuantity += item.quantity)
     );
+
+    const categoriesList = this.props.categories.map(category => (
+      <Link to="/products" className="text-secondary">
+        <Category key={category.name} categoryName={category.name} />
+      </Link>
+    ));
     return (
       <div>
         <header className="header-section">
           <div className="header-top">
             <div className="container">
               <div className="row col-xl-12 col-lg-12">
-                <div className="col-xl-9 col-lg-9  ">
+                <div className="col-xl-8 col-lg-8  ">
                   <SearchBar history={this.props.history} />
                 </div>
 
-                <div className="col-xl-3 col-lg-3  float-right">
+                <div className="col-xl-4 col-lg-4  float-right">
                   <div className="user-panel">
                     {this.props.user ? (
                       <div>
                         <div className="up-item ml-3">
                           <i class="fas fa-user-circle" />
-                          <Link to="/profile">Profile</Link>
+                          <Link to="/profile">{this.props.user.username}</Link>
                         </div>
 
                         <div className="up-item ml-3">
                           <i class="fas fa-sign-out-alt" />
                           <Link onClick={() => this.props.logout()} to="/">
-                            Log Out {this.props.user.username}
+                            Log Out
                           </Link>
                         </div>
                         <div className="up-item">
@@ -87,22 +95,7 @@ class index extends Component {
                   <FontAwesomeIcon icon={faHome} className="text-secondary" />
                   <Link to="/"> Home</Link>
                 </li>
-                <li>
-                  <a href="#">Gifts</a>
-                </li>
-                <li>
-                  <a href="#">Accessories</a>
-                </li>
-                <li>
-                  <a href="#">Clay Art</a>
-                </li>
-
-                <li>
-                  <a href="#">Cards</a>
-                </li>
-                <li>
-                  <a href="#">Sewing</a>
-                </li>
+                {categoriesList}
               </ul>
             </div>
           </nav>
@@ -114,7 +107,11 @@ class index extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authRoot.user,
-    order: state.cartRoot.order
+
+    order: state.cartRoot.order,
+
+    categories: state.productsRoot.categories
+
   };
 };
 

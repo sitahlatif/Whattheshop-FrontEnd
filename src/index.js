@@ -13,7 +13,9 @@ store.dispatch(actionCreators.checkForExpiredToken());
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <switch>
+        <App />
+      </switch>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

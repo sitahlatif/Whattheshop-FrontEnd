@@ -19,6 +19,7 @@ class Profile extends Component {
 
   componentDidMount = () => {
     if (!this.props.profile) this.props.profileDetail();
+
   };
 
   handleSubmit = event => {

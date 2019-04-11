@@ -14,7 +14,7 @@ import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
   state = {
-    quantity: 0
+    quantity: 1
   };
 
   changeHandler = e => {
@@ -77,7 +77,7 @@ class ProductDetail extends Component {
                     <img
                       role="presentation"
                       alt=""
-                      src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                      src={product.images[0].image}
                       className="zoomImg "
                       style={{
                         //   position: "absolute",
@@ -102,47 +102,30 @@ class ProductDetail extends Component {
                         className="pt active"
                         data-imgbigurl="img/single-product/1.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/2.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/3.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/4.jpg"
                       >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
+                        <img src={product.images[0].image} alt="" />
                       </div>
                       <div
                         className="pt"
                         data-imgbigurl="img/single-product/4.jpg"
-                      >
-                        <img
-                          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                          alt=""
-                        />
-                      </div>
+                      />
                     </div>
                   </div>
                 </div>
@@ -262,7 +245,7 @@ class ProductDetail extends Component {
                         data-parent="#accordion"
                       >
                         <div className="panel-body">
-                          <img src="./img/cards.png" alt="" />
+                          <img src={product.images[0].image} alt="" />
                           <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Proin pharetra tempor so dales. Phasellus

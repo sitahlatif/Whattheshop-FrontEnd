@@ -6,9 +6,17 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 class index extends Component {
+  state = {
+    phoneNumber: ""
+  };
   componentDidMount() {
     this.props.onfetchCartList();
   }
+  handlePay = event => {
+    event.preventDefault();
+    this.props.onCheckout(this.props.order.id, this.state);
+  };
+  handleChange = event => this.setState({ phoneNumber: event.target.value });
 
   render() {
     let cartsList;
@@ -98,10 +106,18 @@ class index extends Component {
                       </a>
                     </li>
                     <li>Pay when you get the package</li>
+                    <li>
+                      <input
+                        type="text"
+                        onChange={this.handleChange}
+                        placeholder="Phone Number"
+                        required
+                      />
+                    </li>
                   </ul>
                   <button
                     className="site-btn submit-order-btn"
-                    onClick={() => this.props.onCheckout(this.props.order.id)}
+                    onClick={this.handlePay}
                   >
                     Place Order
                   </button>
@@ -141,7 +157,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckout: orderID => dispatch(actionCreators.checkout(orderID)),
+    onCheckout: (orderID, info) =>
+      dispatch(actionCreators.checkout(orderID, info)),
     onfetchCartList: () => dispatch(actionCreators.fetchCartList())
   };
 };
