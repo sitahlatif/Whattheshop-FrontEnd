@@ -12,7 +12,7 @@ import Singup from "./components/Authentication/Signup";
 import Logout from "./components/Authentication/Logout";
 import Profile from "./components/Profile";
 import Loading from "./components/Loading";
-
+import ThankYou from "./components/ThankYou";
 import ProfileUpdate from "./components/ProfileUpdate";
 import Cart from "./components/Cart";
 import HomePage from "./components/HomePage";
@@ -83,7 +83,7 @@ class App extends Component {
             )}
           />
           <Route path="/cart" component={Cart} />
-
+          <Route path="/thank-you" component={ThankYou} />
           {/* <Route
               path="/Order"
               render={props => <Order {...props} order={this.props.profile} />}

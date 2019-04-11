@@ -16,6 +16,7 @@ const reducer = (state = initialState, action) => {
           ) {
             return "The username and password combination is incorrect.";
           }
+
           return `${key}: ${action.payload[key]}`;
         })
       };
