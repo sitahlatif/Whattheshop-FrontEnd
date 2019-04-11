@@ -152,7 +152,7 @@ class ProductDetail extends Component {
                   <h2 className="p-title">{product.name}</h2>
                   <p>
                     Added By:
-                    {product.added_by}
+                    {product.added_by.username}
                   </p>
                   <h3 className="p-price">SR {product.price}</h3>
                   <h4 className="p-stock">

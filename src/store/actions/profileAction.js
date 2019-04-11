@@ -19,11 +19,10 @@ export const profile = () => {
         payload: Profile
       });
     } catch (err) {
-      dispatch({
-        type: actionTypes.SET_ERRORS,
-        payload: err.response.data
-      });
-
+      // dispatch({
+      //   type: actionTypes.SET_ERRORS,
+      //   payload: err
+      // });
     }
   };
 };
@@ -45,7 +44,7 @@ export const profileUpdate = (userData, profileData) => {
     } catch (err) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err
+        payload: err.response.data
       });
     }
   };

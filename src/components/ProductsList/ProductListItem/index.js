@@ -77,7 +77,7 @@ class index extends Component {
               <h5 className="card-title">{product.name}</h5>
             </h5>
 
-            <p className="card-text">Added By {product.added_by}</p>
+            <p className="card-text">Added By {product.added_by.username}</p>
             <p className="card-text">Stock {product.stock}</p>
 
             <div className="">
@@ -124,7 +124,7 @@ class index extends Component {
                   </a>
                 </div>
               )}
-              <Link to={`/products/${product.id}`}>
+              <Link to={`/products/${product.id}/`}>
                 <a className="btn btn-warning rounded-circle">
                   <FontAwesomeIcon icon={faEye} className="text-light" />
                 </a>

@@ -2,7 +2,7 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import * as actionCreators from "./";
-import { setErrors } from "./errors";
+import { setErrors, resetErrors } from "./errors";
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
 });
@@ -46,16 +46,14 @@ export const login = (userData, history) => {
     try {
       let response = await instance.post("login/", userData);
       let user = response.data;
+      dispatch(resetErrors());
       setAuthToken(user.token);
       dispatch(setCurrentUser(jwt_decode(user.token)));
       dispatch(actionCreators.profile());
       history.push("/profile");
     } catch (err) {
       console.error("An error occurred", err);
-      dispatch({
-        type: actionTypes.SET_ERRORS,
-        payload: err.response.data
-      });
+      dispatch(setErrors(err.response.data));
     }
   };
 };
@@ -65,16 +63,14 @@ export const signup = (userData, history) => {
     try {
       const response = await instance.post("register/", userData);
       let user = response.data;
+      dispatch(resetErrors());
       setAuthToken(user.token);
       dispatch(setCurrentUser(jwt_decode(user.token)));
       dispatch(actionCreators.profile());
       history.push("/profile");
     } catch (err) {
       console.error("An error occurred", err);
-      dispatch({
-        type: actionTypes.SET_ERRORS,
-        payload: err.response.data
-      });
+      dispatch(setErrors(err.response.data));
     }
   };
 };
