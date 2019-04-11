@@ -14,7 +14,7 @@ import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
   state = {
-    quantity: 0
+    quantity: 1
   };
 
   changeHandler = e => {

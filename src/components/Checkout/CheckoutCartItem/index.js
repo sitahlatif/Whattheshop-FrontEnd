@@ -6,7 +6,13 @@ class index extends Component {
       <div>
         <li>
           <div className="pl-thumb">
-            <img src="img/calyart.jpg" alt="" />
+            <img
+              src={
+                "http://127.0.0.1:8000" +
+                this.props.item.product.images[0].image
+              }
+              alt=""
+            />
           </div>
           <h6>{this.props.item.product.name}</h6>
           <p>{this.props.item.product.quantity}</p>

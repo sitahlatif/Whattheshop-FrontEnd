@@ -21,7 +21,7 @@ import {
 import { withRouter } from "react-router-dom";
 class index extends Component {
   state = {
-    quantity: ""
+    quantity: 1
   };
 
   changeHandler = e => {

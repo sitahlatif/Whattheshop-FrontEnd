@@ -11,7 +11,7 @@ import Category from "../ProductsList/Categories/Category";
 class index extends Component {
   render() {
     const categoriesList = this.props.categories.map(category => (
-      <Link to="/products">
+      <Link to="/products" className="text-secondary">
         <Category key={category.name} categoryName={category.name} />
       </Link>
     ));
