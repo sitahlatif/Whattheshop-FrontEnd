@@ -10,6 +10,12 @@ import Category from "../ProductsList/Categories/Category";
 
 class index extends Component {
   render() {
+
+    let itemQuantity = 0;
+    this.props.order.cart_items.forEach(
+      item => (itemQuantity += item.quantity)
+    );
+
     const categoriesList = this.props.categories.map(category => (
       <Link to="/products" className="text-secondary">
         <Category key={category.name} categoryName={category.name} />
@@ -43,17 +49,23 @@ class index extends Component {
                         <div className="up-item">
                           <div className="shopping-card">
                             <i className="flaticon-bag" />
-                            <span>0</span>
+                            <span>{itemQuantity}</span>
                           </div>
                           <Link to="/cart">Shopping Cart</Link>
                         </div>
                       </div>
                     ) : (
                       <div className="up-item ml-3">
-                        <i class="fas fa-sign-in-alt" />
+                        <i
+                          class="fas fa-sign-in-alt"
+                          style={{ color: "gray", marginLeft: 5 }}
+                        />
                         <Link to="/login">Sign In</Link>
                         <div className="up-item ml-3">
-                          <i class="fas fa-user-plus" />
+                          <i
+                            class="fas fa-user-plus"
+                            style={{ color: "gray", marginLeft: 5 }}
+                          />
                           <Link to="/signup">Sign up</Link>
                         </div>
                       </div>
@@ -95,9 +107,14 @@ class index extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authRoot.user,
+
+    order: state.cartRoot.order,
+
     categories: state.productsRoot.categories
+
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(actionCreators.logout())
