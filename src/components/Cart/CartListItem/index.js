@@ -31,7 +31,13 @@ class index extends Component {
           <tbody>
             <tr className="text-center">
               <td class="product-col">
-                <img src="img/calyart.jpg" alt="" />
+                <img
+                  src={
+                    "http://127.0.0.1:8000" +
+                    this.props.item.product.images[0].image
+                  }
+                  alt=""
+                />
                 <div class="pc-title">
                   <h4>{this.props.item.product.name}</h4>
                 </div>
@@ -49,38 +55,6 @@ class index extends Component {
                         onChange={this.changeHandler}
                       />
                     </form>
-                    {this.state.quantity <= this.props.item.product.stock ? (
-                      <div style={{ marginLeft: 450 }}>
-                        <div
-                          onClick={() =>
-                            this.props.updateItemCart(
-                              this.props.item.id,
-                              this.state.quantity
-                            )
-                          }
-                        >
-                          <i class="fas fa-pencil-alt" />
-                        </div>
-                        <div
-                          onClick={() =>
-                            this.props.deleteItemCart(this.props.item.id)
-                          }
-                        >
-                          <i class="fas fa-trash-alt" />
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <p>out of stock</p>
-                        <a
-                          onClick={() =>
-                            this.props.deleteItemCart(this.props.item.id)
-                          }
-                        >
-                          <i class="fas fa-trash-alt" />
-                        </a>
-                      </div>
-                    )}
                   </div>
                 </div>
               </td>
@@ -94,9 +68,44 @@ class index extends Component {
               <td class="total-col">
                 <h4>{this.props.item.subtotal} SR</h4>
               </td>
+              <td>
+                {this.state.quantity <= this.props.item.product.stock ? (
+                  <div className="float-left">
+                    <div
+                      onClick={() =>
+                        this.props.updateItemCart(
+                          this.props.item.id,
+                          this.state.quantity
+                        )
+                      }
+                    >
+                      <i class="fas fa-pencil-alt" />
+                    </div>
+                    <div
+                      onClick={() =>
+                        this.props.deleteItemCart(this.props.item.id)
+                      }
+                    >
+                      <i class="fas fa-trash-alt" />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <p>out of stock</p>
+                    <a
+                      onClick={() =>
+                        this.props.deleteItemCart(this.props.item.id)
+                      }
+                    >
+                      <i class="fas fa-trash-alt" />
+                    </a>
+                  </div>
+                )}
+              </td>
             </tr>
           </tbody>
         </table>
+
         <hr />
       </div>
     );

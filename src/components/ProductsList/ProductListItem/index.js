@@ -9,6 +9,7 @@ import HoverImage from "react-hover-image";
 import calyart from "../../../calyart.jpg";
 import handmade from "../../../handmade.jpg";
 import Loading from "../../Loading";
+
 import {
   faShoppingCart,
   faHeart,
@@ -33,23 +34,26 @@ class index extends Component {
     } else {
       order = this.props.order;
     }
-    console.log(order, "order_id");
+
     const { product } = this.props;
+    console.log(product.images, "image list");
     return (
       <div>
         <div className="card  narrower m-5 ">
-          <HoverImage
-            className="card-img-top"
-            alt="Card image cap"
-            style={{
-              height: 390,
-              width: 330,
-              borderBottomRightRadius: 20,
-              borderBottomLeftRadius: 20
-            }}
-            src={calyart}
-            hoverSrc={handmade}
-          />
+          {product.images.length && (
+            <HoverImage
+              className="card-img-top"
+              alt="Card image cap"
+              style={{
+                height: 390,
+                width: 330,
+                borderBottomRightRadius: 20,
+                borderBottomLeftRadius: 20
+              }}
+              src={product.images[0].image}
+              hoverSrc={product.images[0].image}
+            />
+          )}
 
           <a>
             <div className="mask rgba-white-slight" />
@@ -137,23 +141,21 @@ class index extends Component {
                 <p className="heading">
                   Successfuly Added Product to the cart..!
                 </p>
-                <Link to="/cart">
-                  <a type="button" className="btn btn-success">
-                    <FontAwesomeIcon
-                      icon={faShoppingCart}
-                      className="text-light"
-                    />
-                    Go to cart
-                  </a>
+                <Link to="/cart" className="btn btn-drak text-light ">
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    className="text-light"
+                  />
+                  Go to cart
                 </Link>
 
-                <a
+                <button
                   type="button"
                   className="btn btn-danger waves-effect"
                   data-dismiss="modal"
                 >
                   Cancel
-                </a>
+                </button>
 
                 <button
                   type="button"
