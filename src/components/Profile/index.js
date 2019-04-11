@@ -47,13 +47,13 @@ class Profile extends Component {
               <h3
                 style={{ fontFamily: "monospace" }}
                 className="mb-4 text-center"
+                style={{ fontFamily: "Gill Sans", color: "gray" }}
               >
-                HELLO {this.props.profile.user.username}..!
+                @{this.props.profile.user.username}
               </h3>
               <input id="radio1" type="radio" name="css-tabs" checked />
               <input id="radio2" type="radio" name="css-tabs" />
-
-              <input id="radio4" type="radio" name="css-tabs" />
+              <input id="radio3" type="radio" name="css-tabs" />
               <div id="tabs">
                 <label id="tab1" for="radio1">
                   Information
@@ -61,13 +61,15 @@ class Profile extends Component {
                 <label id="tab2" for="radio2">
                   My Order
                 </label>
-                <label id="tab4" for="radio4">
+                <label id="tab3" for="radio3">
                   Settings
                 </label>
               </div>
               <div id="content">
                 <section id="content1">
-                  <h3>Welcome {this.props.profile.user.username} ! </h3>
+                  <h3 style={{ fontFamily: "Gill Sans", color: "gray" }}>
+                    Welcome {this.props.profile.user.username} !{" "}
+                  </h3>
                   <hr />
                   <p className="mt-3">
                     Welcome to your account dashboard. Get an overview of your
@@ -75,11 +77,7 @@ class Profile extends Component {
                     Select a tab above to view or edit your details.
                   </p>
                   <ul>
-                    <div
-                      role="tabpanel"
-                      className="tab-pane fade show active"
-                      id="profile"
-                    >
+                    <div className="tab-pane fade show active" id="profile">
                       <hr />
                       <div className="row bg-light mt-4 rounded-pill">
                         <div className="col-md-2">
@@ -130,7 +128,7 @@ class Profile extends Component {
 
                   <OrderHistory />
                 </section>
-                <section id="content4" className="m-5 ">
+                <section id="content3" className="m-5 ">
                   <h3>Edit Your Profile Information:</h3>
                   <ProfileUpdate />
                 </section>

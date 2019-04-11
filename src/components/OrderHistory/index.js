@@ -1,7 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Modal, Button } from "react-bootstrap";
 
 class OrderHistory extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false
+    };
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+
   render() {
     console.log(this.props.order.cart_item, "this is order history");
     console.log(this.props.profile.user.orders, "this is order history");
@@ -23,93 +43,60 @@ class OrderHistory extends Component {
                 <div className="card-body">
                   <p className="card-text">ORDER DATE: {order.order_date}</p>
                   <p className="card-text">ORDER TOTAL: {order.total} SR</p>
-                  <div>
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      data-toggle="modal"
-                      data-target="#modalCart"
-                    >
-                      PRINT ORDER
-                    </button>
-                  </div>
+
+                  <button
+                    className="btn btn-dark"
+                    variant="primary"
+                    onClick={this.handleShow}
+                  >
+                    PRINT ORDER
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div
-          class="modal fade"
-          id="modalCart"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">
-                  Orders:
-                </h4>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-
-              <div class="modal-body">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Product name</th>
-                      <th>Quantity:</th>
-                      <th>Price:</th>
-                      <th>Remove</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {order.cart_items.map(item => (
-                      <tr>
-                        <th scope="row">{item.id}</th>
-                        <td>{item.product.name}</td>
-                        <td>{item.quantity}</td>
-                        <td>{item.product.price}</td>
-                        <td>
-                          <a>
-                            <i class="fas fa-times" />
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                    <tr class="total">
-                      <th scope="row">5</th>
-                      <td>{order.total} SR</td>
-                      {/* <td>400$</td> */}
-                      <td />
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-outline-danger"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "gray", color: "white" }}
+          >
+            <Modal.Title># Orders Detail:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {" "}
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product name</th>
+                  <th>Quantity:</th>
+                  <th>Price:</th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.cart_items.map(item => (
+                  <tr>
+                    <th scope="row">{item.id}</th>
+                    <td>{item.product.name}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.product.price}</td>
+                  </tr>
+                ))}
+                <tr class="total">
+                  <td>Total: {order.total} SR</td>
+                  {/* <td>400$</td> */}
+                  <td />
+                </tr>
+              </tbody>
+            </table>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     ));
     return <div> {history}</div>;

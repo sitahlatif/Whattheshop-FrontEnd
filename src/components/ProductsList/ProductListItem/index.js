@@ -56,28 +56,41 @@ class index extends Component {
           </a>
 
           <div className="card-body card-body-cascade">
-            <h5 className="pink-text pb-2 pt-1">
-              <h5 className="card-title">{product.name}</h5>
-            </h5>
+            <div
+              className="pink-text "
+              style={{
+                borderBottomRightRadius: 20,
+                borderBottomLeftRadius: 20,
+                backgroundColor: "lightgray",
+                width: "50"
+              }}
+            >
+              <h5
+                className="card-title text-dark"
+                style={{ paddingLeft: 120, fontWeight: "bold" }}
+              >
+                {product.name}
+              </h5>
+            </div>
 
             <p className="card-text">Added By : {product.added_by.username}</p>
             <p className="card-text">Price : {product.price}</p>
             <p className="card-text">Stock : {product.stock}</p>
 
             <div className="">
+              <form>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="quantity"
+                  name="quantity"
+                  value={this.state.quantity}
+                  onChange={this.changeHandler}
+                />
+              </form>
               {this.state.quantity <= product.stock ? (
                 <div>
-                  <form>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="quantity"
-                      name="quantity"
-                      value={this.state.quantity}
-                      onChange={this.changeHandler}
-                    />
-                  </form>
-                  <button
+                  <a
                     onClick={() => {
                       this.props.addItemToCart(
                         order.id,
@@ -87,33 +100,50 @@ class index extends Component {
                     }}
                     data-toggle="modal"
                     data-target="#modalAbandonedCart"
-                    className="btn rounded-circle"
+                    className="p-3 "
+                    style={{ fontSize: 25 }}
                   >
                     <FontAwesomeIcon
                       icon={faShoppingCart}
                       className="text-dark"
                     />
-                  </button>
+                  </a>
+                  <Link to={`/products/${product.id}/`}>
+                    <a className="p-3 " style={{ fontSize: 25 }}>
+                      <FontAwesomeIcon icon={faEye} className="text-warning" />
+                    </a>
+                  </Link>
+                  <a className="p-3 ">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ fontSize: 25 }}
+                      className="text-danger"
+                    />
+                  </a>
                 </div>
               ) : (
                 <div>
                   <p>out of stock</p>
-                  <a className="">
+                  <a className="p-3" style={{ fontSize: 25 }}>
                     <FontAwesomeIcon
                       icon={faExclamationCircle}
-                      className="text-dark"
+                      className="text-danger"
+                    />
+                  </a>
+                  <Link to={`/products/${product.id}/`}>
+                    <a className="p-3 " style={{ fontSize: 25 }}>
+                      <FontAwesomeIcon icon={faEye} className="text-warning" />
+                    </a>
+                  </Link>
+                  <a className="p-3 ">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ fontSize: 20 }}
+                      className="text-danger"
                     />
                   </a>
                 </div>
               )}
-              <Link to={`/products/${product.id}/`}>
-                <a className="">
-                  <FontAwesomeIcon icon={faEye} className="text-dark" />
-                </a>
-              </Link>
-              <a className="">
-                <FontAwesomeIcon icon={faHeart} className="text-dark" />
-              </a>
             </div>
           </div>
         </div>

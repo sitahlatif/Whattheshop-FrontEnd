@@ -95,11 +95,7 @@ class ProfileUpdate extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            data-dismiss="modal"
-          >
+          <button type="submit" className="btn btn-dark" data-dismiss="modal">
             Update Profile
           </button>
         </form>
