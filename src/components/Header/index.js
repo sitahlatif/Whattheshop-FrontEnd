@@ -7,7 +7,6 @@ import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-
 class index extends Component {
   render() {
     return (
@@ -23,26 +22,32 @@ class index extends Component {
                 <div className="col-xl-3 col-lg-3  float-right">
                   <div className="user-panel">
                     {this.props.user ? (
-                      <div className="up-item ml-3">
-                        <i className="flaticon-profile" />
-                        <Link onClick={() => this.props.logout()} to="/home">
-                          Log Out
-                        </Link>
+                      <div>
+                        <div className="up-item ml-3">
+                          <i class="fas fa-user-circle" />
+                          <Link to="/profile">Profile</Link>
+                        </div>
 
+                        <div className="up-item ml-3">
+                          <i class="fas fa-sign-out-alt" />
+                          <Link onClick={() => this.props.logout()} to="/">
+                            Log Out {this.props.user.username}
+                          </Link>
+                        </div>
                         <div className="up-item">
                           <div className="shopping-card">
                             <i className="flaticon-bag" />
                             <span>0</span>
                           </div>
-                          <a href="#">Shopping Cart</a>
+                          <Link to="/cart">Shopping Cart</Link>
                         </div>
                       </div>
                     ) : (
                       <div className="up-item ml-3">
-                        <i className="flaticon-profile" />
+                        <i class="fas fa-sign-in-alt" />
                         <Link to="/login">Sign In</Link>
                         <div className="up-item ml-3">
-                          <i className="flaticon-profile" />
+                          <i class="fas fa-user-plus" />
                           <Link to="/signup">Sign up</Link>
                         </div>
                       </div>
@@ -70,62 +75,23 @@ class index extends Component {
               <ul className="main-menu text-secondary">
                 <li className="text-secondary">
                   <FontAwesomeIcon icon={faHome} className="text-secondary" />
-                  <Link to="/home"> Home</Link>
+                  <Link to="/"> Home</Link>
                 </li>
                 <li>
-                  <a href="#">Women</a>
+                  <a href="#">Gifts</a>
                 </li>
                 <li>
-                  <a href="#">Men</a>
+                  <a href="#">Accessories</a>
                 </li>
                 <li>
-                  <a href="#">
-                    Jewelry
-                    <span className="new">New</span>
-                  </a>
+                  <a href="#">Clay Art</a>
+                </li>
+
+                <li>
+                  <a href="#">Cards</a>
                 </li>
                 <li>
-                  <a href="#">Shoes</a>
-                  <ul className="sub-menu">
-                    <li>
-                      <a href="#">Sneakers</a>
-                    </li>
-                    <li>
-                      <a href="#">Sandals</a>
-                    </li>
-                    <li>
-                      <a href="#">Formal Shoes</a>
-                    </li>
-                    <li>
-                      <a href="#">Boots</a>
-                    </li>
-                    <li>
-                      <a href="#">Flip Flops</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Pages</a>
-                  <ul className="sub-menu">
-                    <li>
-                      <a href="./product.html">Product Page</a>
-                    </li>
-                    <li>
-                      <a href="./category.html">Category Page</a>
-                    </li>
-                    <li>
-                      <a href="./cart.html">Cart Page</a>
-                    </li>
-                    <li>
-                      <a href="./checkout.html">Checkout Page</a>
-                    </li>
-                    <li>
-                      <a href="./contact.html">Contact Page</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
+                  <a href="#">Sewing</a>
                 </li>
               </ul>
             </div>

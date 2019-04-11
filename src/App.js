@@ -56,7 +56,7 @@ class App extends Component {
         <Header />
 
         <Switch>
-          <Route path="/Home" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Singup} />
           <Route path="/logout" component={Logout} />
@@ -88,9 +88,8 @@ class App extends Component {
               path="/Order"
               render={props => <Order {...props} order={this.props.profile} />}
             /> */}
+          {/* <Redirect to="/" /> */}
         </Switch>
-
-        {/* <Redirect to="/" /> */}
       </div>
     );
   }

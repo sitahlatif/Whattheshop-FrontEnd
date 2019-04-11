@@ -22,20 +22,6 @@ class index extends Component {
   state = {
     quantity: ""
   };
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.quantity !== prevState.quantity) {
-      this.props.onFetchAllProducts();
-    }
-    // console.log(
-    //   "[ProductListitem.js] this.state.quantity: ",
-    //   this.state.quantity
-    // );
-    // console.log("[ProductListitem.js] prevState: ", prevState);
-    // console.log(
-    //   "[ProductListitem.js] prevState.quantity: ",
-    //   prevState.quantity
-    // );
-  }
 
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -52,7 +38,6 @@ class index extends Component {
     return (
       <div>
         <div className="card  narrower m-5 ">
-          {/* <img src="img/calyart.jpg" alt="Card image cap" /> */}
           <HoverImage
             className="card-img-top"
             alt="Card image cap"
@@ -72,13 +57,12 @@ class index extends Component {
 
           <div className="card-body card-body-cascade">
             <h5 className="pink-text pb-2 pt-1">
-              <i className="fas fa-utensils" />
-
               <h5 className="card-title">{product.name}</h5>
             </h5>
 
-            <p className="card-text">Added By {product.added_by}</p>
-            <p className="card-text">Stock {product.stock}</p>
+            <p className="card-text">Added By : {product.added_by.username}</p>
+            <p className="card-text">Price : {product.price}</p>
+            <p className="card-text">Stock : {product.stock}</p>
 
             <div className="">
               {this.state.quantity <= product.stock ? (
@@ -101,36 +85,34 @@ class index extends Component {
                         this.state.quantity
                       );
                     }}
-                    type="button"
-                    class="btn btn-primary"
                     data-toggle="modal"
                     data-target="#modalAbandonedCart"
-                    className="btn btn-dark rounded-circle"
+                    className="btn rounded-circle"
                   >
                     <FontAwesomeIcon
                       icon={faShoppingCart}
-                      className="text-light"
+                      className="text-dark"
                     />
                   </button>
                 </div>
               ) : (
                 <div>
                   <p>out of stock</p>
-                  <a className="btn btn-danger rounded-circle">
+                  <a className="">
                     <FontAwesomeIcon
                       icon={faExclamationCircle}
-                      className="text-light"
+                      className="text-dark"
                     />
                   </a>
                 </div>
               )}
-              <Link to={`/products/${product.id}`}>
-                <a className="btn btn-warning rounded-circle">
-                  <FontAwesomeIcon icon={faEye} className="text-light" />
+              <Link to={`/products/${product.id}/`}>
+                <a className="">
+                  <FontAwesomeIcon icon={faEye} className="text-dark" />
                 </a>
               </Link>
-              <a className="btn btn-danger rounded-circle">
-                <FontAwesomeIcon icon={faHeart} className="text-light" />
+              <a className="">
+                <FontAwesomeIcon icon={faHeart} className="text-dark" />
               </a>
             </div>
           </div>

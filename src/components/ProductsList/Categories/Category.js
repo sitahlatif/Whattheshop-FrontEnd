@@ -18,9 +18,7 @@ class Category extends Component {
   render() {
     return (
       <li>
-        <a onClick={this.handleClick} href="#">
-          {this.props.categoryName}
-        </a>
+        <a onClick={this.handleClick}>{this.props.categoryName}</a>
       </li>
     );
   }

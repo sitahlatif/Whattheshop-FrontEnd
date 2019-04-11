@@ -12,7 +12,7 @@ export const profile = () => {
     try {
       const res = await instance.get("profile/");
       const Profile = res.data;
-      // dispatch(resetErrors());
+      dispatch(resetErrors());
       console.log("heres the profile: ", Profile);
       dispatch({
         type: actionTypes.PROFILE,
@@ -23,7 +23,6 @@ export const profile = () => {
         type: actionTypes.SET_ERRORS,
         payload: err.response.data
       });
-
     }
   };
 };

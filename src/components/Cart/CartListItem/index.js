@@ -30,34 +30,6 @@ class index extends Component {
           </thead>
           <tbody>
             <tr className="text-center">
-              {/* <div className="card w-50">
-          <div className="card-body">
-            <h5 className="card-title">{this.props.item.product.name}</h5>
-            <p className="card-text">
-              Price: {this.props.item.product.price} SR
-            </p>
-            <input
-              type="number"
-              className="card-text"
-              value={this.props.item.quantity}
-            />
-
-            <p className="card-text">
-              {" "}
-              subtotal: {this.props.item.subtotal} SR
-            </p>
-            <a href="#" className="btn btn-primary">
-              update
-            </a>
-            <a
-              onClick={() => this.props.deleteItemCart(this.props.item.id)}
-              className="btn btn-danger"
-            >
-              delete
-            </a>
-          </div>
-        </div> */}
-
               <td class="product-col">
                 <img src="img/calyart.jpg" alt="" />
                 <div class="pc-title">
@@ -78,34 +50,35 @@ class index extends Component {
                       />
                     </form>
                     {this.state.quantity <= this.props.item.product.stock ? (
-                      <div>
-                        {/* <p className="card-text">
-                        subtotal: {this.props.item.subtotal} SR
-                      </p> */}
-                        {/* <a
-                      onClick={() =>
-                        this.props.updateItemCart(
-                          this.props.item.id,
-                          this.state.quantity
-                        )
-                      }
-                      className="btn btn-primary"
-                    >
-                      update
-                    </a>
-                    */}
+                      <div style={{ marginLeft: 450 }}>
+                        <div
+                          onClick={() =>
+                            this.props.updateItemCart(
+                              this.props.item.id,
+                              this.state.quantity
+                            )
+                          }
+                        >
+                          <i class="fas fa-pencil-alt" />
+                        </div>
+                        <div
+                          onClick={() =>
+                            this.props.deleteItemCart(this.props.item.id)
+                          }
+                        >
+                          <i class="fas fa-trash-alt" />
+                        </div>
                       </div>
                     ) : (
                       <div>
                         <p>out of stock</p>
-                        {/* <a
-                      onClick={() =>
-                        this.props.deleteItemCart(this.props.item.id)
-                      }
-                      className="btn btn-danger"
-                    >
-                      delete
-                    </a> */}
+                        <a
+                          onClick={() =>
+                            this.props.deleteItemCart(this.props.item.id)
+                          }
+                        >
+                          <i class="fas fa-trash-alt" />
+                        </a>
                       </div>
                     )}
                   </div>
@@ -120,26 +93,6 @@ class index extends Component {
 
               <td class="total-col">
                 <h4>{this.props.item.subtotal} SR</h4>
-              </td>
-              <td>
-                {" "}
-                <a
-                  onClick={() =>
-                    this.props.updateItemCart(
-                      this.props.item.id,
-                      this.state.quantity
-                    )
-                  }
-                  className="text-danger"
-                >
-                  <p>UPDATE</p>
-                </a>
-                <a
-                  onClick={() => this.props.deleteItemCart(this.props.item.id)}
-                  className="text-danger"
-                >
-                  <FontAwesomeIcon icon={faWindowClose} className="text-teal" />{" "}
-                </a>
               </td>
             </tr>
           </tbody>
